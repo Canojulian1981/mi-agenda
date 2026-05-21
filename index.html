@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Centro de Control</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f5f4f0; --surface: #ffffff; --surface2: #f0efe9; --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18); --text: #1a1a18; --text2: #666660; --text3: #999993;
+    --purple: #534AB7; --purple-light: #EEEDFE; --radius: 8px; --radius-lg: 12px;
+  }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); min-height: 100vh; color: var(--text); }
+  .app { display: flex; flex-direction: column; min-height: 100vh; }
+  .header { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 12px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
+  .logo { font-size: 17px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .logo i { color: var(--purple); font-size: 20px; }
+  .header-actions { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: transparent; color: var(--text); font-size: 13px; cursor: pointer; transition: background 0.15s; white-space: nowrap; font-family: inherit; }
+  .btn:hover { background: var(--surface2); }
+  .btn-primary { background: var(--purple); color: #fff; border-color: var(--purple); }
+  .btn-primary:hover { background: #3C3489; }
+  .btn-danger { background: #FCEBEB; color: #A32D2D; border-color: #F7C1C1; }
+  .btn-danger:hover { background: #F7C1C1; }
+  .btn i { font-size: 15px; }
+  .tabs { background: var(--surface); border-bottom: 0.5px solid var(--border); display: flex; overflow-x: auto; }
+  .tab { padding: 10px 16px; font-size: 13px; cursor: pointer; color: var(--text2); border-bottom: 2px solid transparent; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: color 0.15s; }
+  .tab.active { color: var(--purple); border-bottom-color: var(--purple); font-weight: 500; }
+  .tab:hover:not(.active) { color: var(--text); }
+  .tab .cnt { background: var(--surface2); color: var(--text2); font-size: 11px; padding: 1px 6px; border-radius: 10px; }
+  .tab.active .cnt { background: var(--purple-light); color: var(--purple); }
+  .content { flex: 1; padding: 16px 20px; max-width: 1100px; width: 100%; margin: 0 auto; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 18px; }
+  .stat-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px; }
+  .stat-label { font-size: 11px; color: var(--text2); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+  .stat-value { font-size: 26px; font-weight: 600; color: var(--text); }
+  .stat-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .search-input { flex: 1; min-width: 150px; padding: 7px 12px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--surface); color: var(--text); font-size: 13px; font-family: inherit; }
+  .search-input::placeholder { color: var(--text3); }
+  .filter-sel { padding: 7px 10px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--surface); color: var(--text); font-size: 13px; cursor: pointer; font-family: inherit; }
+  .view-btn { padding: 7px 10px; }
+  .view-btn.active { background: var(--purple-light); color: var(--purple); border-color: var(--purple); }
+  .kanban { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
+  .stage-col { min-width: 230px; flex: 1; background: var(--surface2); border-radius: var(--radius-lg); padding: 12px; }
+  .stage-hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .stage-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .stage-name { font-size: 13px; font-weight: 500; }
+  .stage-cnt { margin-left: auto; font-size: 11px; color: var(--text2); background: var(--surface); padding: 1px 7px; border-radius: 10px; }
+  .task-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
+  .task-card:hover { border-color: var(--border2); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .task-title { font-size: 13px; font-weight: 500; margin-bottom: 7px; line-height: 1.4; }
+  .task-meta { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+  .badge { font-size: 11px; padding: 2px 7px; border-radius: var(--radius); font-weight: 500; white-space: nowrap; }
+  .badge-alta { background: #FCEBEB; color: #A32D2D; }
+  .badge-media { background: #FAEEDA; color: #854F0B; }
+  .badge-baja { background: #EAF3DE; color: #3B6D11; }
+  .badge-type { background: var(--surface2); color: var(--text2); }
+  .badge-seg { background: var(--purple-light); color: var(--purple); }
+  .task-date { font-size: 11px; color: var(--text3); margin-left: auto; display: flex; align-items: center; gap: 3px; }
+  .task-date.overdue { color: #A32D2D; }
+  .add-btn { width: 100%; padding: 7px; border-radius: var(--radius); border: 0.5px dashed var(--border2); background: transparent; color: var(--text3); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; margin-top: 4px; font-family: inherit; }
+  .add-btn:hover { background: var(--surface); color: var(--text2); }
+  .list-view { display: flex; flex-direction: column; gap: 6px; }
+  .list-item { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: border-color 0.15s; }
+  .list-item:hover { border-color: var(--border2); }
+  .check-circle { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--border2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s; }
+  .check-circle:hover { border-color: var(--purple); }
+  .check-circle.done { background: var(--purple); border-color: var(--purple); }
+  .check-circle.done i { color: #fff; font-size: 12px; }
+  .list-title { flex: 1; font-size: 13px; }
+  .list-title.done { text-decoration: line-through; color: var(--text3); }
+  .list-meta { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .calendar { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .cal-hdr { display: flex; align-items: center; padding: 12px 16px; border-bottom: 0.5px solid var(--border); gap: 8px; }
+  .cal-month { font-size: 15px; font-weight: 500; flex: 1; text-align: center; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+  .cal-lbl { text-align: center; padding: 8px 4px; font-size: 11px; color: var(--text2); font-weight: 500; border-bottom: 0.5px solid var(--border); }
+  .cal-day { min-height: 80px; padding: 6px; border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .cal-day:nth-child(7n) { border-right: none; }
+  .cal-day.other .day-n { color: var(--text3); }
+  .cal-day.today .day-n { background: var(--purple); color: #fff; border-radius: 50%; }
+  .day-n { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-bottom: 3px; }
+  .cal-dot { font-size: 10px; padding: 1px 5px; border-radius: 3px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+  .cal-dot.alta { background: #FCEBEB; color: #A32D2D; }
+  .cal-dot.media { background: #FAEEDA; color: #854F0B; }
+  .cal-dot.baja { background: #EAF3DE; color: #3B6D11; }
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; display: flex; align-items: flex-end; justify-content: center; }
+  @media(min-width:600px){ .overlay { align-items: center; padding: 20px; } }
+  .modal { background: var(--surface); border-radius: var(--radius-lg) var(--radius-lg) 0 0; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; padding: 20px; }
+  @media(min-width:600px){ .modal { border-radius: var(--radius-lg); } }
+  .modal-hdr { display: flex; align-items: center; margin-bottom: 18px; }
+  .modal-title { font-size: 15px; font-weight: 600; }
+  .modal-close { margin-left: auto; background: none; border: none; cursor: pointer; color: var(--text2); font-size: 20px; line-height: 1; padding: 2px; }
+  .form-grp { margin-bottom: 14px; }
+  .form-lbl { font-size: 12px; color: var(--text2); margin-bottom: 5px; display: block; }
+  .form-inp { width: 100%; padding: 8px 12px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--surface); color: var(--text); font-size: 13px; font-family: inherit; }
+  .form-inp:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 2px rgba(83,74,183,0.15); }
+  .form-ta { width: 100%; padding: 8px 12px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--surface); color: var(--text); font-size: 13px; min-height: 75px; resize: vertical; font-family: inherit; }
+  .form-ta:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 2px rgba(83,74,183,0.15); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; flex-wrap: wrap; }
+  .prio-opts { display: flex; gap: 8px; }
+  .prio-opt { flex: 1; padding: 8px 6px; border-radius: var(--radius); border: 0.5px solid var(--border2); text-align: center; cursor: pointer; font-size: 12px; font-weight: 500; color: var(--text2); transition: all 0.15s; }
+  .prio-opt.alta.sel { background: #FCEBEB; border-color: #E24B4A; color: #A32D2D; }
+  .prio-opt.media.sel { background: #FAEEDA; border-color: #EF9F27; color: #854F0B; }
+  .prio-opt.baja.sel { background: #EAF3DE; border-color: #97C459; color: #3B6D11; }
+  .chk-row { display: flex; align-items: center; gap: 8px; padding-top: 6px; }
+  .chk-row input[type=checkbox] { width: 15px; height: 15px; accent-color: var(--purple); cursor: pointer; }
+  .chk-row label { font-size: 13px; color: var(--text2); cursor: pointer; }
+  .empty { text-align: center; padding: 48px 20px; color: var(--text3); }
+  .empty i { font-size: 44px; margin-bottom: 10px; display: block; }
+  .confirm-body { font-size: 14px; color: var(--text); margin-bottom: 8px; }
+  .confirm-task { font-size: 13px; color: var(--text2); background: var(--surface2); border-radius: var(--radius); padding: 10px 12px; margin-bottom: 20px; font-style: italic; }
+  @media(max-width:640px){
+    .content { padding: 12px; } .header { padding: 10px 12px; }
+    .kanban { flex-direction: column; } .stage-col { min-width: 100%; }
+    .form-row { grid-template-columns: 1fr; } .stats-grid { grid-template-columns: 1fr 1fr; }
+    .list-meta .badge-type { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<script>
+const STAGES=[
+  {id:'idea',name:'Por hacer',color:'#B4B2A9'},
+  {id:'progress',name:'En progreso',color:'#534AB7'},
+  {id:'review',name:'En revisi\u00f3n',color:'#EF9F27'},
+  {id:'blocked',name:'Bloqueado',color:'#E24B4A'},
+  {id:'done',name:'Completado',color:'#639922'}
+];
+const TYPES=['Tarea','Reuni\u00f3n','Seguimiento','Agenda','Proyecto','Otro'];
+const TODAY=new Date();
+
+// Tareas precargadas desde tu app
+const SEED_TASKS = [
+  {id:'t001',title:'Transferencia Puntos y Linea de credito BOA',desc:'',type:'Tarea',priority:'alta',stage:'idea',date:'2025-05-21',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t002',title:'Reclamacion Filtro Nevera o Revision Ice Maker',desc:'',type:'Tarea',priority:'alta',stage:'idea',date:'2025-05-29',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t003',title:'Responder correo Beyond Oil',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t004',title:'Analizar y Responder correo PleatPak',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t005',title:'Compra pasaje Ctg y Reserva Hotel',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t006',title:'Subir to do pago y cobro los Lagartos',desc:'',type:'Tarea',priority:'alta',stage:'progress',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t007',title:'Comprar Griferia Ba\u00f1o Social',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t008',title:'Comprar Regalo Dia de la Madre Laura',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t009',title:'Buscar Ropa Golf Pedro con Puntos Colombia',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t010',title:'Sueldo Jani',desc:'',type:'Tarea',priority:'media',stage:'review',date:'2025-05-23',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t011',title:'Msn Yiyo Kandeo con Avance',desc:'',type:'Tarea',priority:'baja',stage:'review',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t012',title:'Pago cuentas Laura',desc:'',type:'Tarea',priority:'media',stage:'review',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t013',title:'Pago predial BV',desc:'',type:'Tarea',priority:'media',stage:'review',date:'2025-05-19',followup:false,followupDate:'',created:'2025-05-20'}
+];
+
+let S={
+  tasks:[],view:'kanban',tab:'all',modal:null,editId:null,confirmDel:false,
+  calDate:new Date(TODAY.getFullYear(),TODAY.getMonth(),1),
+  filter:{q:'',priority:'all',type:'all'},
+  form:{title:'',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'',followup:false,followupDate:''}
+};
+
+// Cargar desde localStorage; si está vacío usar las tareas precargadas
+try{
+  const d=localStorage.getItem('agenda_v3');
+  if(d){
+    const parsed=JSON.parse(d);
+    // Merge: agregar seed tasks que no existan aún
+    const existingIds=parsed.map(t=>t.id);
+    const newSeeds=SEED_TASKS.filter(t=>!existingIds.includes(t.id));
+    S.tasks=[...parsed,...newSeeds];
+  } else {
+    S.tasks=[...SEED_TASKS];
+  }
+}catch(e){ S.tasks=[...SEED_TASKS]; }
+
+function persist(){try{localStorage.setItem('agenda_v3',JSON.stringify(S.tasks));}catch(e){}}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
+function fmt(d){if(!d)return'';const x=d instanceof Date?d:new Date(d+'T00:00:00');return x.toISOString().slice(0,10);}
+function disp(s){if(!s)return'';return new Date(s+'T00:00:00').toLocaleDateString('es-CO',{day:'numeric',month:'short'});}
+function overdue(s){return s&&s<fmt(TODAY);}
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function q(s){return document.querySelector(s);}
+function pct(){const d=S.tasks.filter(t=>t.stage==='done').length;return S.tasks.length?Math.round(d/S.tasks.length*100):0;}
+
+function filtered(){
+  let t=[...S.tasks];
+  const tod=fmt(TODAY),we=fmt(new Date(TODAY.getTime()+6*864e5));
+  if(S.tab==='hoy')t=t.filter(x=>x.date===tod);
+  else if(S.tab==='semana')t=t.filter(x=>x.date&&x.date>=tod&&x.date<=we);
+  else if(S.tab==='seg')t=t.filter(x=>x.followup);
+  if(S.filter.priority!=='all')t=t.filter(x=>x.priority===S.filter.priority);
+  if(S.filter.type!=='all')t=t.filter(x=>x.type===S.filter.type);
+  if(S.filter.q){const qv=S.filter.q.toLowerCase();t=t.filter(x=>x.title.toLowerCase().includes(qv)||(x.desc||'').toLowerCase().includes(qv));}
+  return t;
+}
+
+function openNew(stage){S.form={title:'',desc:'',type:'Tarea',priority:'media',stage:stage||'idea',date:'',followup:false,followupDate:''};S.modal='new';S.confirmDel=false;render();}
+function openEdit(task){S.form={...task};S.editId=task.id;S.modal='edit';S.confirmDel=false;render();}
+function syncForm(){
+  const f=S.form;
+  f.title=q('#ft')?.value||f.title;f.desc=q('#fd')?.value||'';
+  f.type=q('#ftype')?.value||f.type;f.stage=q('#fstage')?.value||f.stage;
+  f.date=q('#fdate')?.value||'';f.followup=q('#ffol')?.checked||false;f.followupDate=q('#ffoldate')?.value||'';
+}
+function saveTask(){
+  if(!S.form.title.trim())return;
+  if(S.modal==='new'){S.tasks.push({...S.form,id:uid(),created:fmt(TODAY)});}
+  else{const i=S.tasks.findIndex(t=>t.id===S.editId);if(i>-1)S.tasks[i]={...S.tasks[i],...S.form};}
+  persist();S.modal=null;render();
+}
+function delTask(){S.tasks=S.tasks.filter(t=>t.id!==S.editId);persist();S.modal=null;S.confirmDel=false;render();}
+function toggleDone(id){const t=S.tasks.find(t=>t.id===id);if(t){t.stage=t.stage==='done'?'idea':'done';persist();render();}}
+
+function render(){document.getElementById('app').innerHTML=html();bind();}
+
+function html(){
+  const tasks=filtered();
+  const tod=fmt(TODAY),we=fmt(new Date(TODAY.getTime()+6*864e5));
+  const counts={all:S.tasks.length,hoy:S.tasks.filter(t=>t.date===tod).length,semana:S.tasks.filter(t=>t.date&&t.date>=tod&&t.date<=we).length,seg:S.tasks.filter(t=>t.followup).length};
+  const tabs=[{id:'all',label:'Todo',icon:'ti-layout-list'},{id:'hoy',label:'Hoy',icon:'ti-calendar-today'},{id:'semana',label:'Esta semana',icon:'ti-calendar-week'},{id:'seg',label:'Seguimientos',icon:'ti-refresh'}];
+  return`<div class="header">
+  <div class="logo"><i class="ti ti-command"></i>Mi Centro de Control</div>
+  <div class="header-actions">
+    <button class="btn view-btn${S.view==='kanban'?' active':''}" data-v="kanban" title="Kanban"><i class="ti ti-layout-columns"></i></button>
+    <button class="btn view-btn${S.view==='list'?' active':''}" data-v="list" title="Lista"><i class="ti ti-list"></i></button>
+    <button class="btn view-btn${S.view==='cal'?' active':''}" data-v="cal" title="Calendario"><i class="ti ti-calendar"></i></button>
+    <button class="btn btn-primary" id="btn-new"><i class="ti ti-plus"></i>Nueva tarea</button>
+  </div>
+</div>
+<div class="tabs">${tabs.map(t=>`<div class="tab${S.tab===t.id?' active':''}" data-tab="${t.id}"><i class="ti ${t.icon}"></i>${t.label}<span class="cnt">${counts[t.id]}</span></div>`).join('')}</div>
+<div class="content">
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label"><i class="ti ti-checklist"></i>Total tareas</div><div class="stat-value">${S.tasks.length}</div><div class="stat-sub">${pct()}% completado</div></div>
+    <div class="stat-card"><div class="stat-label"><i class="ti ti-circle-check"></i>Completadas</div><div class="stat-value">${S.tasks.filter(t=>t.stage==='done').length}</div><div class="stat-sub">de ${S.tasks.length}</div></div>
+    <div class="stat-card"><div class="stat-label"><i class="ti ti-flame"></i>Prioridad alta</div><div class="stat-value">${S.tasks.filter(t=>t.priority==='alta'&&t.stage!=='done').length}</div><div class="stat-sub">pendientes</div></div>
+    <div class="stat-card"><div class="stat-label"><i class="ti ti-refresh"></i>Seguimientos</div><div class="stat-value">${S.tasks.filter(t=>t.followup&&t.stage!=='done').length}</div><div class="stat-sub">activos</div></div>
+  </div>
+  <div class="filters">
+    <input class="search-input" id="sq" placeholder="Buscar tareas..." value="${esc(S.filter.q)}">
+    <select class="filter-sel" id="fp"><option value="all">Todas las prioridades</option><option value="alta"${S.filter.priority==='alta'?' selected':''}>Alta</option><option value="media"${S.filter.priority==='media'?' selected':''}>Media</option><option value="baja"${S.filter.priority==='baja'?' selected':''}>Baja</option></select>
+    <select class="filter-sel" id="ft2"><option value="all">Todos los tipos</option>${TYPES.map(t=>`<option value="${t}"${S.filter.type===t?' selected':''}>${t}</option>`).join('')}</select>
+  </div>
+  ${S.view==='kanban'?kanban(tasks):S.view==='list'?listV(tasks):calendar()}
+</div>
+${S.modal?modal():''}`;
+}
+
+function card(t){
+  const od=overdue(t.date)&&t.stage!=='done';
+  return`<div class="task-card" data-id="${t.id}">
+    <div class="task-title">${esc(t.title)}</div>
+    <div class="task-meta">
+      <span class="badge badge-${t.priority}">${t.priority.charAt(0).toUpperCase()+t.priority.slice(1)}</span>
+      <span class="badge badge-type">${t.type}</span>
+      ${t.followup?'<span class="badge badge-seg"><i class="ti ti-refresh" style="font-size:10px"></i></span>':''}
+      ${t.date?`<span class="task-date${od?' overdue':''}"><i class="ti ti-calendar" style="font-size:10px"></i>${disp(t.date)}</span>`:''}
+    </div>
+  </div>`;
+}
+
+function kanban(tasks){
+  return`<div class="kanban">${STAGES.map(s=>{
+    const st=tasks.filter(t=>t.stage===s.id);
+    return`<div class="stage-col">
+      <div class="stage-hdr"><span class="stage-dot" style="background:${s.color}"></span><span class="stage-name">${s.name}</span><span class="stage-cnt">${st.length}</span></div>
+      ${st.length?st.map(t=>card(t)).join(''):'<div style="text-align:center;padding:18px 0;font-size:12px;color:var(--text3)">Sin tareas</div>'}
+      <button class="add-btn" data-stage="${s.id}"><i class="ti ti-plus"></i>Agregar</button>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+function listV(tasks){
+  if(!tasks.length)return`<div class="empty"><i class="ti ti-inbox"></i><p>Sin tareas en esta vista</p></div>`;
+  const po={alta:0,media:1,baja:2};
+  return`<div class="list-view">${[...tasks].sort((a,b)=>(po[a.priority]||1)-(po[b.priority]||1)).map(t=>`
+    <div class="list-item" data-id="${t.id}">
+      <div class="check-circle${t.stage==='done'?' done':''}" data-chk="${t.id}">${t.stage==='done'?'<i class="ti ti-check"></i>':''}</div>
+      <span class="list-title${t.stage==='done'?' done':''}">${esc(t.title)}</span>
+      <div class="list-meta">
+        <span class="badge badge-${t.priority}">${t.priority}</span>
+        <span class="badge badge-type">${t.type}</span>
+        ${t.followup?'<span class="badge badge-seg">seguim.</span>':''}
+        ${t.date?`<span class="task-date${overdue(t.date)&&t.stage!=='done'?' overdue':''}" style="font-size:11px">${disp(t.date)}</span>`:''}
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function calendar(){
+  const y=S.calDate.getFullYear(),m=S.calDate.getMonth();
+  const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
+  const mn=S.calDate.toLocaleDateString('es-CO',{month:'long',year:'numeric'});
+  const byDate={};S.tasks.forEach(t=>{if(t.date){if(!byDate[t.date])byDate[t.date]=[];byDate[t.date].push(t);}});
+  const off=(first+6)%7;let cells='';
+  for(let i=0;i<off;i++){const d=new Date(y,m,1-off+i);cells+=`<div class="cal-day other"><div class="day-n">${d.getDate()}</div></div>`;}
+  for(let d=1;d<=days;d++){
+    const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isT=ds===fmt(TODAY),dt=byDate[ds]||[];
+    cells+=`<div class="cal-day${isT?' today':''}"><div class="day-n">${d}</div>${dt.slice(0,3).map(t=>`<div class="cal-dot ${t.priority}" data-id="${t.id}">${esc(t.title)}</div>`).join('')}${dt.length>3?`<div style="font-size:10px;color:var(--text3)">+${dt.length-3}</div>`:''}</div>`;
+  }
+  const rem=(7-((off+days)%7))%7;for(let i=1;i<=rem;i++)cells+=`<div class="cal-day other"><div class="day-n">${i}</div></div>`;
+  return`<div class="calendar">
+    <div class="cal-hdr">
+      <button class="btn" id="cal-p" style="padding:5px 8px"><i class="ti ti-chevron-left"></i></button>
+      <span class="cal-month">${mn.charAt(0).toUpperCase()+mn.slice(1)}</span>
+      <button class="btn" id="cal-n" style="padding:5px 8px"><i class="ti ti-chevron-right"></i></button>
+    </div>
+    <div class="cal-grid">${['Lun','Mar','Mi\u00e9','Jue','Vie','S\u00e1b','Dom'].map(d=>`<div class="cal-lbl">${d}</div>`).join('')}${cells}</div>
+  </div>`;
+}
+
+function modal(){
+  const f=S.form,isEdit=S.modal==='edit';
+  if(S.confirmDel){return`<div class="overlay" id="ov">
+    <div class="modal" style="max-width:360px">
+      <div class="modal-hdr"><span class="modal-title" style="color:#A32D2D"><i class="ti ti-alert-triangle"></i> Eliminar tarea</span><button class="modal-close" id="mc"><i class="ti ti-x"></i></button></div>
+      <p class="confirm-body">\u00bfEst\u00e1s seguro que deseas eliminar esta tarea?</p>
+      <div class="confirm-task">"${esc(f.title)}"</div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn" id="cd-no">Cancelar</button>
+        <button class="btn btn-danger" id="cd-yes"><i class="ti ti-trash"></i> S\u00ed, eliminar</button>
+      </div>
+    </div>
+  </div>`;}
+  return`<div class="overlay" id="ov">
+    <div class="modal">
+      <div class="modal-hdr"><span class="modal-title">${isEdit?'Editar tarea':'Nueva tarea'}</span><button class="modal-close" id="mc"><i class="ti ti-x"></i></button></div>
+      <div class="form-grp"><label class="form-lbl">T\u00edtulo *</label><input class="form-inp" id="ft" placeholder="\u00bfQu\u00e9 necesitas hacer?" value="${esc(f.title)}"></div>
+      <div class="form-grp"><label class="form-lbl">Descripci\u00f3n / Notas</label><textarea class="form-ta" id="fd" placeholder="Detalles, contexto...">${esc(f.desc||'')}</textarea></div>
+      <div class="form-row">
+        <div class="form-grp"><label class="form-lbl">Tipo</label><select class="form-inp" id="ftype">${TYPES.map(t=>`<option${f.type===t?' selected':''}>${t}</option>`).join('')}</select></div>
+        <div class="form-grp"><label class="form-lbl">Etapa</label><select class="form-inp" id="fstage">${STAGES.map(s=>`<option value="${s.id}"${f.stage===s.id?' selected':''}>${s.name}</option>`).join('')}</select></div>
+      </div>
+      <div class="form-grp"><label class="form-lbl">Prioridad</label>
+        <div class="prio-opts">${['alta','media','baja'].map(p=>`<div class="prio-opt ${p}${f.priority===p?' sel':''}" data-p="${p}">${p.charAt(0).toUpperCase()+p.slice(1)}</div>`).join('')}</div>
+      </div>
+      <div class="form-row">
+        <div class="form-grp"><label class="form-lbl">Fecha l\u00edmite</label><input class="form-inp" id="fdate" type="date" value="${f.date||''}"></div>
+        <div class="form-grp"><label class="form-lbl">Seguimiento</label><div class="chk-row"><input type="checkbox" id="ffol"${f.followup?' checked':''}><label for="ffol">Requiere seguimiento</label></div></div>
+      </div>
+      ${f.followup?`<div class="form-grp"><label class="form-lbl">Fecha de seguimiento</label><input class="form-inp" id="ffoldate" type="date" value="${f.followupDate||''}"></div>`:''}
+      <div class="form-actions">
+        ${isEdit?`<button class="btn btn-danger" id="btn-del" style="margin-right:auto"><i class="ti ti-trash"></i> Eliminar</button>`:''}
+        <button class="btn" id="btn-cancel">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save"><i class="ti ti-device-floppy"></i>${isEdit?'Guardar cambios':'Crear tarea'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function bind(){
+  q('#btn-new')?.addEventListener('click',()=>openNew());
+  document.querySelectorAll('.tab').forEach(el=>el.addEventListener('click',()=>{S.tab=el.dataset.tab;render();}));
+  document.querySelectorAll('.view-btn').forEach(el=>el.addEventListener('click',()=>{S.view=el.dataset.v;render();}));
+  q('#sq')?.addEventListener('input',e=>{S.filter.q=e.target.value;render();});
+  q('#fp')?.addEventListener('change',e=>{S.filter.priority=e.target.value;render();});
+  q('#ft2')?.addEventListener('change',e=>{S.filter.type=e.target.value;render();});
+  document.querySelectorAll('.task-card,.cal-dot').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const t=S.tasks.find(t=>t.id===el.dataset.id);if(t)openEdit(t);}));
+  document.querySelectorAll('.list-item').forEach(el=>el.addEventListener('click',e=>{if(e.target.dataset.chk)return;const t=S.tasks.find(t=>t.id===el.dataset.id);if(t)openEdit(t);}));
+  document.querySelectorAll('[data-chk]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();toggleDone(el.dataset.chk);}));
+  document.querySelectorAll('.add-btn').forEach(el=>el.addEventListener('click',()=>openNew(el.dataset.stage)));
+  q('#cal-p')?.addEventListener('click',()=>{S.calDate.setMonth(S.calDate.getMonth()-1);render();});
+  q('#cal-n')?.addEventListener('click',()=>{S.calDate.setMonth(S.calDate.getMonth()+1);render();});
+  if(S.modal){
+    const close=()=>{S.modal=null;S.confirmDel=false;render();};
+    q('#mc')?.addEventListener('click',close);
+    q('#ov')?.addEventListener('click',e=>{if(e.target===e.currentTarget)close();});
+    if(S.confirmDel){
+      q('#cd-no')?.addEventListener('click',()=>{S.confirmDel=false;render();});
+      q('#cd-yes')?.addEventListener('click',delTask);
+    }else{
+      q('#btn-cancel')?.addEventListener('click',close);
+      q('#btn-save')?.addEventListener('click',()=>{syncForm();saveTask();});
+      q('#btn-del')?.addEventListener('click',()=>{syncForm();S.confirmDel=true;render();});
+      q('#ffol')?.addEventListener('change',()=>{syncForm();render();});
+      document.querySelectorAll('.prio-opt').forEach(el=>el.addEventListener('click',()=>{S.form.priority=el.dataset.p;render();}));
+      setTimeout(()=>q('#ft')?.focus(),50);
+    }
+  }
+}
+
+persist();
+render();
+</script>
+</body>
+</html>
