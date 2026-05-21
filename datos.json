@@ -74,7 +74,7 @@
     },
     {
       "id": "t007",
-      "title": "Comprar Grifería Baño Social",
+      "title": "Comprar GriferÃ­a BaÃ±o Social",
       "desc": "",
       "type": "Tarea",
       "priority": "media",
@@ -155,6 +155,18 @@
       "followup": false,
       "followupDate": "",
       "created": "2025-05-20"
+    },
+    {
+      "title": "Pagar TC itau",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpf1kh1didw",
+      "created": "2026-05-21"
     }
   ]
 }
