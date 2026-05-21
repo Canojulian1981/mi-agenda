@@ -179,6 +179,18 @@
       "followupDate": "",
       "id": "mpf1lwnfitn",
       "created": "2026-05-21"
+    },
+    {
+      "title": "To Rise 7 am",
+      "desc": "",
+      "type": "Reunión",
+      "priority": "alta",
+      "stage": "idea",
+      "date": "2026-05-28",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpfmwhvswki",
+      "created": "2026-05-21"
     }
   ]
 }
