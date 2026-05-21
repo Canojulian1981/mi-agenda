@@ -74,7 +74,7 @@
     },
     {
       "id": "t007",
-      "title": "Comprar GriferÃ­a BaÃ±o Social",
+      "title": "Comprar GriferÃÂ­a BaÃÂ±o Social",
       "desc": "",
       "type": "Tarea",
       "priority": "media",
@@ -166,6 +166,18 @@
       "followup": false,
       "followupDate": "",
       "id": "mpf1kh1didw",
+      "created": "2026-05-21"
+    },
+    {
+      "title": "Cotizar pirlanes dorados",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "alta",
+      "stage": "idea",
+      "date": "2026-05-28",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpf1lwnfitn",
       "created": "2026-05-21"
     }
   ]
