@@ -112,7 +112,7 @@
       "id": "t010",
       "title": "Sueldo Jani",
       "desc": "",
-      "type": "Agenda",
+      "type": "Tarea",
       "priority": "media",
       "stage": "review",
       "date": "2025-05-23",
@@ -183,7 +183,7 @@
     {
       "title": "To Rise 7 am",
       "desc": "https://teams.live.com/meet/9367525404779?p=8e7yATgmzWQzKoNPaU",
-      "type": "Reunión",
+      "type": "ReuniÃ³n",
       "priority": "alta",
       "stage": "idea",
       "date": "2026-05-28",
