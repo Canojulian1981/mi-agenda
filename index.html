@@ -14,6 +14,28 @@
   }
   body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); min-height: 100vh; color: var(--text); }
   .app { display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* Token screen */
+  .token-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+  .token-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 32px; max-width: 400px; width: 100%; }
+  .token-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+  .token-logo i { font-size: 28px; color: var(--purple); }
+  .token-logo span { font-size: 20px; font-weight: 600; }
+  .token-desc { font-size: 13px; color: var(--text2); margin-bottom: 20px; line-height: 1.6; }
+  .token-input { width: 100%; padding: 10px 12px; border-radius: var(--radius); border: 0.5px solid var(--border2); font-size: 13px; font-family: inherit; margin-bottom: 8px; color: var(--text); background: var(--surface); }
+  .token-input:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 2px rgba(83,74,183,0.15); }
+  .token-hint { font-size: 11px; color: var(--text3); margin-bottom: 16px; line-height: 1.5; }
+  .token-error { font-size: 12px; color: #A32D2D; background: #FCEBEB; padding: 8px 12px; border-radius: var(--radius); margin-bottom: 12px; display: none; }
+
+  /* Sync bar */
+  .sync-bar { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 6px 20px; display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text3); }
+  .sync-bar i { font-size: 13px; }
+  .sync-ok { color: #3B6D11; }
+  .sync-err { color: #A32D2D; }
+  .sync-loading { color: var(--purple); }
+  .sync-bar .logout-btn { margin-left: auto; font-size: 11px; color: var(--text3); cursor: pointer; background: none; border: none; display: flex; align-items: center; gap: 4px; font-family: inherit; }
+  .sync-bar .logout-btn:hover { color: var(--text2); }
+
   .header { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 12px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
   .logo { font-size: 17px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
   .logo i { color: var(--purple); font-size: 20px; }
@@ -123,27 +145,35 @@
 </style>
 </head>
 <body>
-<div class="app" id="app"></div>
+<div id="root"></div>
 <script>
+// ─── CONFIG ───────────────────────────────────────────────
+const REPO_OWNER = 'Canojulian1981';
+const REPO_NAME  = 'mi-agenda';
+const DATA_FILE  = 'datos.json';
+const TOKEN_KEY  = 'agenda_gh_token';
+const BRANCH     = 'main';
+
+// ─── CONSTANTES ───────────────────────────────────────────
 const STAGES=[
-  {id:'idea',name:'Por hacer',color:'#B4B2A9'},
-  {id:'progress',name:'En progreso',color:'#534AB7'},
-  {id:'review',name:'En revisi\u00f3n',color:'#EF9F27'},
-  {id:'blocked',name:'Bloqueado',color:'#E24B4A'},
-  {id:'done',name:'Completado',color:'#639922'}
+  {id:'idea',     name:'Por hacer',   color:'#B4B2A9'},
+  {id:'progress', name:'En progreso', color:'#534AB7'},
+  {id:'review',   name:'En revisi\u00f3n', color:'#EF9F27'},
+  {id:'blocked',  name:'Bloqueado',   color:'#E24B4A'},
+  {id:'done',     name:'Completado',  color:'#639922'}
 ];
 const TYPES=['Tarea','Reuni\u00f3n','Seguimiento','Agenda','Proyecto','Otro'];
 const TODAY=new Date();
 
-// Tareas precargadas desde tu app
-const SEED_TASKS = [
+// Tareas iniciales (solo se usan si el archivo datos.json no existe aún)
+const SEED_TASKS=[
   {id:'t001',title:'Transferencia Puntos y Linea de credito BOA',desc:'',type:'Tarea',priority:'alta',stage:'idea',date:'2025-05-21',followup:false,followupDate:'',created:'2025-05-20'},
   {id:'t002',title:'Reclamacion Filtro Nevera o Revision Ice Maker',desc:'',type:'Tarea',priority:'alta',stage:'idea',date:'2025-05-29',followup:false,followupDate:'',created:'2025-05-20'},
   {id:'t003',title:'Responder correo Beyond Oil',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
   {id:'t004',title:'Analizar y Responder correo PleatPak',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
   {id:'t005',title:'Compra pasaje Ctg y Reserva Hotel',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
   {id:'t006',title:'Subir to do pago y cobro los Lagartos',desc:'',type:'Tarea',priority:'alta',stage:'progress',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t007',title:'Comprar Griferia Ba\u00f1o Social',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'',followup:false,followupDate:'',created:'2025-05-20'},
+  {id:'t007',title:'Comprar Grifer\u00eda Ba\u00f1o Social',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'',followup:false,followupDate:'',created:'2025-05-20'},
   {id:'t008',title:'Comprar Regalo Dia de la Madre Laura',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
   {id:'t009',title:'Buscar Ropa Golf Pedro con Puntos Colombia',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
   {id:'t010',title:'Sueldo Jani',desc:'',type:'Tarea',priority:'media',stage:'review',date:'2025-05-23',followup:false,followupDate:'',created:'2025-05-20'},
@@ -152,28 +182,72 @@ const SEED_TASKS = [
   {id:'t013',title:'Pago predial BV',desc:'',type:'Tarea',priority:'media',stage:'review',date:'2025-05-19',followup:false,followupDate:'',created:'2025-05-20'}
 ];
 
+// ─── ESTADO ───────────────────────────────────────────────
 let S={
-  tasks:[],view:'kanban',tab:'all',modal:null,editId:null,confirmDel:false,
+  token: localStorage.getItem(TOKEN_KEY)||'',
+  tasks:[], fileSha:'',
+  view:'kanban', tab:'all', modal:null, editId:null, confirmDel:false,
+  syncStatus:'idle', // idle | loading | ok | error
   calDate:new Date(TODAY.getFullYear(),TODAY.getMonth(),1),
   filter:{q:'',priority:'all',type:'all'},
   form:{title:'',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'',followup:false,followupDate:''}
 };
 
-// Cargar desde localStorage; si está vacío usar las tareas precargadas
-try{
-  const d=localStorage.getItem('agenda_v3');
-  if(d){
-    const parsed=JSON.parse(d);
-    // Merge: agregar seed tasks que no existan aún
-    const existingIds=parsed.map(t=>t.id);
-    const newSeeds=SEED_TASKS.filter(t=>!existingIds.includes(t.id));
-    S.tasks=[...parsed,...newSeeds];
-  } else {
-    S.tasks=[...SEED_TASKS];
-  }
-}catch(e){ S.tasks=[...SEED_TASKS]; }
+// ─── GITHUB API ───────────────────────────────────────────
+const API = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
 
-function persist(){try{localStorage.setItem('agenda_v3',JSON.stringify(S.tasks));}catch(e){}}
+async function ghLoad(){
+  setSyncStatus('loading');
+  try{
+    const r=await fetch(API+'?ref='+BRANCH+'&t='+Date.now(),{
+      headers:{Authorization:'token '+S.token, Accept:'application/vnd.github.v3+json'}
+    });
+    if(r.status===404){
+      // Archivo no existe aún, usar seed y crear
+      S.tasks=[...SEED_TASKS];
+      S.fileSha='';
+      await ghSave();
+      return true;
+    }
+    if(!r.ok){ setSyncStatus('error'); return false; }
+    const data=await r.json();
+    S.fileSha=data.sha;
+    const content=JSON.parse(atob(data.content.replace(/\n/g,'')));
+    S.tasks=content.tasks||[];
+    setSyncStatus('ok');
+    return true;
+  }catch(e){ setSyncStatus('error'); return false; }
+}
+
+async function ghSave(){
+  setSyncStatus('loading');
+  try{
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify({tasks:S.tasks},null,2))));
+    const body={message:'actualizar tareas '+new Date().toISOString(),content,branch:BRANCH};
+    if(S.fileSha) body.sha=S.fileSha;
+    const r=await fetch(API,{
+      method:'PUT',
+      headers:{Authorization:'token '+S.token,'Content-Type':'application/json',Accept:'application/vnd.github.v3+json'},
+      body:JSON.stringify(body)
+    });
+    if(!r.ok){ setSyncStatus('error'); return false; }
+    const data=await r.json();
+    S.fileSha=data.content.sha;
+    setSyncStatus('ok');
+    return true;
+  }catch(e){ setSyncStatus('error'); return false; }
+}
+
+async function validateToken(token){
+  const r=await fetch(API+'?ref='+BRANCH,{
+    headers:{Authorization:'token '+token, Accept:'application/vnd.github.v3+json'}
+  });
+  return r.status===200||r.status===404; // 404 = repo ok pero archivo no existe aún
+}
+
+function setSyncStatus(s){ S.syncStatus=s; renderSyncBar(); }
+
+// ─── HELPERS ──────────────────────────────────────────────
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
 function fmt(d){if(!d)return'';const x=d instanceof Date?d:new Date(d+'T00:00:00');return x.toISOString().slice(0,10);}
 function disp(s){if(!s)return'';return new Date(s+'T00:00:00').toLocaleDateString('es-CO',{day:'numeric',month:'short'});}
@@ -198,51 +272,113 @@ function openNew(stage){S.form={title:'',desc:'',type:'Tarea',priority:'media',s
 function openEdit(task){S.form={...task};S.editId=task.id;S.modal='edit';S.confirmDel=false;render();}
 function syncForm(){
   const f=S.form;
-  f.title=q('#ft')?.value||f.title;f.desc=q('#fd')?.value||'';
-  f.type=q('#ftype')?.value||f.type;f.stage=q('#fstage')?.value||f.stage;
-  f.date=q('#fdate')?.value||'';f.followup=q('#ffol')?.checked||false;f.followupDate=q('#ffoldate')?.value||'';
+  f.title=q('#ft')?.value||f.title; f.desc=q('#fd')?.value||'';
+  f.type=q('#ftype')?.value||f.type; f.stage=q('#fstage')?.value||f.stage;
+  f.date=q('#fdate')?.value||''; f.followup=q('#ffol')?.checked||false; f.followupDate=q('#ffoldate')?.value||'';
 }
-function saveTask(){
+async function saveTask(){
   if(!S.form.title.trim())return;
   if(S.modal==='new'){S.tasks.push({...S.form,id:uid(),created:fmt(TODAY)});}
   else{const i=S.tasks.findIndex(t=>t.id===S.editId);if(i>-1)S.tasks[i]={...S.tasks[i],...S.form};}
-  persist();S.modal=null;render();
+  S.modal=null; render();
+  await ghSave();
 }
-function delTask(){S.tasks=S.tasks.filter(t=>t.id!==S.editId);persist();S.modal=null;S.confirmDel=false;render();}
-function toggleDone(id){const t=S.tasks.find(t=>t.id===id);if(t){t.stage=t.stage==='done'?'idea':'done';persist();render();}}
+async function delTask(){
+  S.tasks=S.tasks.filter(t=>t.id!==S.editId);
+  S.modal=null;S.confirmDel=false;render();
+  await ghSave();
+}
+async function toggleDone(id){
+  const t=S.tasks.find(t=>t.id===id);
+  if(t){t.stage=t.stage==='done'?'idea':'done';render();await ghSave();}
+}
 
-function render(){document.getElementById('app').innerHTML=html();bind();}
+// ─── RENDER ───────────────────────────────────────────────
+function renderSyncBar(){
+  const bar=q('#sync-bar');
+  if(!bar)return;
+  const icons={idle:'ti-cloud',loading:'ti-loader-2',ok:'ti-cloud-check',error:'ti-cloud-x'};
+  const texts={idle:'Conectado a GitHub',loading:'Guardando...',ok:'Guardado en GitHub',error:'Error al guardar'};
+  const cls={idle:'',loading:'sync-loading',ok:'sync-ok',error:'sync-err'};
+  bar.innerHTML=`<i class="ti ${icons[S.syncStatus]} ${cls[S.syncStatus]}"></i><span class="${cls[S.syncStatus]}">${texts[S.syncStatus]}</span><button class="logout-btn" id="btn-logout"><i class="ti ti-logout"></i>Cambiar token</button>`;
+  q('#btn-logout')?.addEventListener('click',()=>{localStorage.removeItem(TOKEN_KEY);S.token='';S.tasks=[];render();});
+}
 
-function html(){
+function render(){
+  if(!S.token){ document.getElementById('root').innerHTML=renderTokenScreen(); bindToken(); return; }
+  document.getElementById('root').innerHTML=renderApp();
+  bind();
+  renderSyncBar();
+}
+
+function renderTokenScreen(){
+  return`<div class="token-screen">
+    <div class="token-card">
+      <div class="token-logo"><i class="ti ti-command"></i><span>Mi Centro de Control</span></div>
+      <p class="token-desc">Para sincronizar tus tareas en todos tus dispositivos necesitas tu <strong>GitHub Personal Access Token</strong>.</p>
+      <input class="token-input" id="token-inp" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      <p class="token-hint">Ve a GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic). Crea uno con scope <strong>repo</strong>.</p>
+      <div class="token-error" id="token-err">Token inv\u00e1lido. Verifica que tenga el scope <strong>repo</strong>.</div>
+      <button class="btn btn-primary" id="btn-token-ok" style="width:100%;justify-content:center"><i class="ti ti-key"></i>Conectar y cargar tareas</button>
+    </div>
+  </div>`;
+}
+
+function bindToken(){
+  q('#btn-token-ok')?.addEventListener('click', async()=>{
+    const val=q('#token-inp')?.value?.trim();
+    if(!val)return;
+    q('#btn-token-ok').innerHTML='<i class="ti ti-loader-2"></i>Verificando...';
+    q('#btn-token-ok').disabled=true;
+    const ok=await validateToken(val);
+    if(ok){
+      S.token=val;
+      localStorage.setItem(TOKEN_KEY,val);
+      render();
+      await ghLoad();
+      render();
+    }else{
+      q('#token-err').style.display='block';
+      q('#btn-token-ok').innerHTML='<i class="ti ti-key"></i>Conectar y cargar tareas';
+      q('#btn-token-ok').disabled=false;
+    }
+  });
+  q('#token-inp')?.addEventListener('keydown',e=>{if(e.key==='Enter')q('#btn-token-ok')?.click();});
+}
+
+function renderApp(){
   const tasks=filtered();
   const tod=fmt(TODAY),we=fmt(new Date(TODAY.getTime()+6*864e5));
   const counts={all:S.tasks.length,hoy:S.tasks.filter(t=>t.date===tod).length,semana:S.tasks.filter(t=>t.date&&t.date>=tod&&t.date<=we).length,seg:S.tasks.filter(t=>t.followup).length};
   const tabs=[{id:'all',label:'Todo',icon:'ti-layout-list'},{id:'hoy',label:'Hoy',icon:'ti-calendar-today'},{id:'semana',label:'Esta semana',icon:'ti-calendar-week'},{id:'seg',label:'Seguimientos',icon:'ti-refresh'}];
-  return`<div class="header">
-  <div class="logo"><i class="ti ti-command"></i>Mi Centro de Control</div>
-  <div class="header-actions">
-    <button class="btn view-btn${S.view==='kanban'?' active':''}" data-v="kanban" title="Kanban"><i class="ti ti-layout-columns"></i></button>
-    <button class="btn view-btn${S.view==='list'?' active':''}" data-v="list" title="Lista"><i class="ti ti-list"></i></button>
-    <button class="btn view-btn${S.view==='cal'?' active':''}" data-v="cal" title="Calendario"><i class="ti ti-calendar"></i></button>
-    <button class="btn btn-primary" id="btn-new"><i class="ti ti-plus"></i>Nueva tarea</button>
+  return`<div class="app">
+  <div class="sync-bar" id="sync-bar"></div>
+  <div class="header">
+    <div class="logo"><i class="ti ti-command"></i>Mi Centro de Control</div>
+    <div class="header-actions">
+      <button class="btn view-btn${S.view==='kanban'?' active':''}" data-v="kanban" title="Kanban"><i class="ti ti-layout-columns"></i></button>
+      <button class="btn view-btn${S.view==='list'?' active':''}" data-v="list" title="Lista"><i class="ti ti-list"></i></button>
+      <button class="btn view-btn${S.view==='cal'?' active':''}" data-v="cal" title="Calendario"><i class="ti ti-calendar"></i></button>
+      <button class="btn btn-primary" id="btn-new"><i class="ti ti-plus"></i>Nueva tarea</button>
+    </div>
   </div>
-</div>
-<div class="tabs">${tabs.map(t=>`<div class="tab${S.tab===t.id?' active':''}" data-tab="${t.id}"><i class="ti ${t.icon}"></i>${t.label}<span class="cnt">${counts[t.id]}</span></div>`).join('')}</div>
-<div class="content">
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-label"><i class="ti ti-checklist"></i>Total tareas</div><div class="stat-value">${S.tasks.length}</div><div class="stat-sub">${pct()}% completado</div></div>
-    <div class="stat-card"><div class="stat-label"><i class="ti ti-circle-check"></i>Completadas</div><div class="stat-value">${S.tasks.filter(t=>t.stage==='done').length}</div><div class="stat-sub">de ${S.tasks.length}</div></div>
-    <div class="stat-card"><div class="stat-label"><i class="ti ti-flame"></i>Prioridad alta</div><div class="stat-value">${S.tasks.filter(t=>t.priority==='alta'&&t.stage!=='done').length}</div><div class="stat-sub">pendientes</div></div>
-    <div class="stat-card"><div class="stat-label"><i class="ti ti-refresh"></i>Seguimientos</div><div class="stat-value">${S.tasks.filter(t=>t.followup&&t.stage!=='done').length}</div><div class="stat-sub">activos</div></div>
+  <div class="tabs">${tabs.map(t=>`<div class="tab${S.tab===t.id?' active':''}" data-tab="${t.id}"><i class="ti ${t.icon}"></i>${t.label}<span class="cnt">${counts[t.id]}</span></div>`).join('')}</div>
+  <div class="content">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label"><i class="ti ti-checklist"></i>Total tareas</div><div class="stat-value">${S.tasks.length}</div><div class="stat-sub">${pct()}% completado</div></div>
+      <div class="stat-card"><div class="stat-label"><i class="ti ti-circle-check"></i>Completadas</div><div class="stat-value">${S.tasks.filter(t=>t.stage==='done').length}</div><div class="stat-sub">de ${S.tasks.length}</div></div>
+      <div class="stat-card"><div class="stat-label"><i class="ti ti-flame"></i>Prioridad alta</div><div class="stat-value">${S.tasks.filter(t=>t.priority==='alta'&&t.stage!=='done').length}</div><div class="stat-sub">pendientes</div></div>
+      <div class="stat-card"><div class="stat-label"><i class="ti ti-refresh"></i>Seguimientos</div><div class="stat-value">${S.tasks.filter(t=>t.followup&&t.stage!=='done').length}</div><div class="stat-sub">activos</div></div>
+    </div>
+    <div class="filters">
+      <input class="search-input" id="sq" placeholder="Buscar tareas..." value="${esc(S.filter.q)}">
+      <select class="filter-sel" id="fp"><option value="all">Todas las prioridades</option><option value="alta"${S.filter.priority==='alta'?' selected':''}>Alta</option><option value="media"${S.filter.priority==='media'?' selected':''}>Media</option><option value="baja"${S.filter.priority==='baja'?' selected':''}>Baja</option></select>
+      <select class="filter-sel" id="ft2"><option value="all">Todos los tipos</option>${TYPES.map(t=>`<option value="${t}"${S.filter.type===t?' selected':''}>${t}</option>`).join('')}</select>
+    </div>
+    ${S.view==='kanban'?kanban(tasks):S.view==='list'?listV(tasks):calendar()}
   </div>
-  <div class="filters">
-    <input class="search-input" id="sq" placeholder="Buscar tareas..." value="${esc(S.filter.q)}">
-    <select class="filter-sel" id="fp"><option value="all">Todas las prioridades</option><option value="alta"${S.filter.priority==='alta'?' selected':''}>Alta</option><option value="media"${S.filter.priority==='media'?' selected':''}>Media</option><option value="baja"${S.filter.priority==='baja'?' selected':''}>Baja</option></select>
-    <select class="filter-sel" id="ft2"><option value="all">Todos los tipos</option>${TYPES.map(t=>`<option value="${t}"${S.filter.type===t?' selected':''}>${t}</option>`).join('')}</select>
-  </div>
-  ${S.view==='kanban'?kanban(tasks):S.view==='list'?listV(tasks):calendar()}
-</div>
-${S.modal?modal():''}`;
+  ${S.modal?modal():''}
+</div>`;
 }
 
 function card(t){
@@ -378,8 +514,11 @@ function bind(){
   }
 }
 
-persist();
+// ─── INICIO ───────────────────────────────────────────────
 render();
+if(S.token){
+  ghLoad().then(()=>render());
+}
 </script>
 </body>
 </html>
