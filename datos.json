@@ -179,6 +179,18 @@
       "followupDate": "",
       "id": "mpf1lwnfitn",
       "created": "2026-05-21"
+    },
+    {
+      "title": "llamada Barry prueba",
+      "desc": "",
+      "type": "Reunión",
+      "priority": "media",
+      "stage": "idea",
+      "date": "2026-05-25",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpfms5axclk",
+      "created": "2026-05-21"
     }
   ]
 }
