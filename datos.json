@@ -160,7 +160,7 @@
       "title": "Pagar TC itau",
       "desc": "",
       "type": "Tarea",
-      "priority": "media",
+      "priority": "alta",
       "stage": "idea",
       "date": "",
       "followup": false,
