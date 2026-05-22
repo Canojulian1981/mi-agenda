@@ -227,6 +227,18 @@
       "followupDate": "",
       "id": "mpghq2rw9g1",
       "created": "2026-05-22"
+    },
+    {
+      "title": "Sociedades y Taxes USA",
+      "desc": "",
+      "type": "Seguimiento",
+      "priority": "alta",
+      "stage": "idea",
+      "date": "2026-05-27",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpghs3f5s03",
+      "created": "2026-05-22"
     }
   ]
 }
