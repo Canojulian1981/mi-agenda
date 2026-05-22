@@ -53,7 +53,7 @@
       "title": "Compra pasaje Ctg y Reserva Hotel",
       "desc": "",
       "type": "Tarea",
-      "priority": "alta",
+      "priority": "baja",
       "stage": "idea",
       "date": "2025-05-22",
       "followup": false,
