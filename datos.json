@@ -215,18 +215,6 @@
       "followupDate": "",
       "id": "mpfrmz5zby8",
       "created": "2026-05-21"
-    },
-    {
-      "title": "Ñato cita prueba",
-      "desc": "",
-      "type": "Tarea",
-      "priority": "media",
-      "stage": "idea",
-      "date": "2026-05-29",
-      "followup": false,
-      "followupDate": "",
-      "id": "mpgh9e3pvxj",
-      "created": "2026-05-22"
     }
   ]
 }
