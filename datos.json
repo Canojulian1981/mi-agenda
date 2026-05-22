@@ -239,6 +239,18 @@
       "followupDate": "",
       "id": "mpghs3f5s03",
       "created": "2026-05-22"
+    },
+    {
+      "title": "Pruebas Magnesol",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "2026-05-26",
+      "followup": false,
+      "followupDate": "",
+      "id": "mphg2r635nm",
+      "created": "2026-05-22"
     }
   ]
 }
