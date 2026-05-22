@@ -11,11 +11,10 @@
     --bg: #f5f4f0; --surface: #ffffff; --surface2: #f0efe9; --border: rgba(0,0,0,0.1);
     --border2: rgba(0,0,0,0.18); --text: #1a1a18; --text2: #666660; --text3: #999993;
     --purple: #534AB7; --purple-light: #EEEDFE; --radius: 8px; --radius-lg: 12px;
+    --personal-bg: #EAF4FB; --personal-border: #B3D6EE;
   }
   body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); min-height: 100vh; color: var(--text); }
   .app { display: flex; flex-direction: column; min-height: 100vh; }
-
-  /* Token screen */
   .token-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
   .token-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 32px; max-width: 400px; width: 100%; }
   .token-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
@@ -26,8 +25,6 @@
   .token-input:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 2px rgba(83,74,183,0.15); }
   .token-hint { font-size: 11px; color: var(--text3); margin-bottom: 16px; line-height: 1.5; }
   .token-error { font-size: 12px; color: #A32D2D; background: #FCEBEB; padding: 8px 12px; border-radius: var(--radius); margin-bottom: 12px; display: none; }
-
-  /* Sync bar */
   .sync-bar { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 6px 20px; display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text3); }
   .sync-bar i { font-size: 13px; }
   .sync-ok { color: #3B6D11; }
@@ -35,7 +32,6 @@
   .sync-loading { color: var(--purple); }
   .sync-bar .logout-btn { margin-left: auto; font-size: 11px; color: var(--text3); cursor: pointer; background: none; border: none; display: flex; align-items: center; gap: 4px; font-family: inherit; }
   .sync-bar .logout-btn:hover { color: var(--text2); }
-
   .header { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 12px 20px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
   .logo { font-size: 17px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
   .logo i { color: var(--purple); font-size: 20px; }
@@ -73,6 +69,8 @@
   .stage-cnt { margin-left: auto; font-size: 11px; color: var(--text2); background: var(--surface); padding: 1px 7px; border-radius: 10px; }
   .task-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
   .task-card:hover { border-color: var(--border2); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .task-card.personal { background: var(--personal-bg); border-color: var(--personal-border); }
+  .task-card.personal:hover { border-color: #7DB8D8; box-shadow: 0 2px 8px rgba(83,148,196,0.15); }
   .task-title { font-size: 13px; font-weight: 500; margin-bottom: 7px; line-height: 1.4; }
   .task-meta { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
   .badge { font-size: 11px; padding: 2px 7px; border-radius: var(--radius); font-weight: 500; white-space: nowrap; }
@@ -80,6 +78,7 @@
   .badge-media { background: #FAEEDA; color: #854F0B; }
   .badge-baja { background: #EAF3DE; color: #3B6D11; }
   .badge-type { background: var(--surface2); color: var(--text2); }
+  .badge-personal { background: #C5DFF0; color: #1A5A80; }
   .badge-seg { background: var(--purple-light); color: var(--purple); }
   .task-date { font-size: 11px; color: var(--text3); margin-left: auto; display: flex; align-items: center; gap: 3px; }
   .task-date.overdue { color: #A32D2D; }
@@ -88,6 +87,8 @@
   .list-view { display: flex; flex-direction: column; gap: 6px; }
   .list-item { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 10px 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: border-color 0.15s; }
   .list-item:hover { border-color: var(--border2); }
+  .list-item.personal { background: var(--personal-bg); border-color: var(--personal-border); }
+  .list-item.personal:hover { border-color: #7DB8D8; }
   .check-circle { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--border2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s; }
   .check-circle:hover { border-color: var(--purple); }
   .check-circle.done { background: var(--purple); border-color: var(--purple); }
@@ -109,6 +110,7 @@
   .cal-dot.alta { background: #FCEBEB; color: #A32D2D; }
   .cal-dot.media { background: #FAEEDA; color: #854F0B; }
   .cal-dot.baja { background: #EAF3DE; color: #3B6D11; }
+  .cal-dot.personal-dot { background: var(--personal-bg); color: #1A5A80; border: 0.5px solid var(--personal-border); }
   .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; display: flex; align-items: flex-end; justify-content: center; }
   @media(min-width:600px){ .overlay { align-items: center; padding: 20px; } }
   .modal { background: var(--surface); border-radius: var(--radius-lg) var(--radius-lg) 0 0; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; padding: 20px; }
@@ -147,378 +149,446 @@
 <body>
 <div id="root"></div>
 <script>
-// ─── CONFIG ───────────────────────────────────────────────
+// ── CONFIG ────────────────────────────────────────────────
 const REPO_OWNER = 'Canojulian1981';
 const REPO_NAME  = 'mi-agenda';
 const DATA_FILE  = 'datos.json';
 const TOKEN_KEY  = 'agenda_gh_token';
 const BRANCH     = 'main';
 
-// ─── CONSTANTES ───────────────────────────────────────────
-const STAGES=[
-  {id:'idea',     name:'Por hacer',   color:'#B4B2A9'},
-  {id:'progress', name:'En progreso', color:'#534AB7'},
-  {id:'review',   name:'En revisi\u00f3n', color:'#EF9F27'},
-  {id:'blocked',  name:'Bloqueado',   color:'#E24B4A'},
-  {id:'done',     name:'Completado',  color:'#639922'}
-];
-const TYPES=['Tarea','Reuni\u00f3n','Seguimiento','Agenda','Proyecto','Otro'];
-const TODAY=new Date();
-
-// Tareas iniciales (solo se usan si el archivo datos.json no existe aún)
-const SEED_TASKS=[
-  {id:'t001',title:'Transferencia Puntos y Linea de credito BOA',desc:'',type:'Tarea',priority:'alta',stage:'idea',date:'2025-05-21',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t002',title:'Reclamacion Filtro Nevera o Revision Ice Maker',desc:'',type:'Tarea',priority:'alta',stage:'idea',date:'2025-05-29',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t003',title:'Responder correo Beyond Oil',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t004',title:'Analizar y Responder correo PleatPak',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t005',title:'Compra pasaje Ctg y Reserva Hotel',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t006',title:'Subir to do pago y cobro los Lagartos',desc:'',type:'Tarea',priority:'alta',stage:'progress',date:'2025-05-22',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t007',title:'Comprar Grifer\u00eda Ba\u00f1o Social',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t008',title:'Comprar Regalo Dia de la Madre Laura',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t009',title:'Buscar Ropa Golf Pedro con Puntos Colombia',desc:'',type:'Tarea',priority:'media',stage:'progress',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t010',title:'Sueldo Jani',desc:'',type:'Tarea',priority:'media',stage:'review',date:'2025-05-23',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t011',title:'Msn Yiyo Kandeo con Avance',desc:'',type:'Tarea',priority:'baja',stage:'review',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t012',title:'Pago cuentas Laura',desc:'',type:'Tarea',priority:'media',stage:'review',date:'2025-05-27',followup:false,followupDate:'',created:'2025-05-20'},
-  {id:'t013',title:'Pago predial BV',desc:'',type:'Tarea',priority:'media',stage:'review',date:'2025-05-19',followup:false,followupDate:'',created:'2025-05-20'}
+// ── CONSTANTES ────────────────────────────────────────────
+const STAGES = [
+  { id:'idea',     name:'Por hacer',   color:'#B4B2A9' },
+  { id:'progress', name:'En progreso', color:'#534AB7' },
+  { id:'review',   name:'En revision', color:'#EF9F27' },
+  { id:'blocked',  name:'Bloqueado',   color:'#E24B4A' },
+  { id:'done',     name:'Completado',  color:'#639922' }
 ];
 
-// ─── ESTADO ───────────────────────────────────────────────
-let S={
-  token: localStorage.getItem(TOKEN_KEY)||'',
-  tasks:[], fileSha:'',
-  view:'kanban', tab:'all', modal:null, editId:null, confirmDel:false,
-  syncStatus:'idle', // idle | loading | ok | error
-  calDate:new Date(TODAY.getFullYear(),TODAY.getMonth(),1),
-  filter:{q:'',priority:'all',type:'all'},
-  form:{title:'',desc:'',type:'Tarea',priority:'media',stage:'idea',date:'',followup:false,followupDate:''}
+// Tarea Personal va inmediatamente despues de Tarea
+const TYPES = ['Tarea','Tarea Personal','Reunion','Seguimiento','Agenda','Proyecto','Otro'];
+
+const SEED_TASKS = [
+  { id:'t001', title:'Transferencia Puntos y Linea de credito BOA',    desc:'', type:'Tarea', priority:'alta',  stage:'idea',     date:'2025-05-21', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t002', title:'Reclamacion Filtro Nevera o Revision Ice Maker', desc:'', type:'Tarea', priority:'alta',  stage:'idea',     date:'2025-05-29', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t003', title:'Responder correo Beyond Oil',                    desc:'', type:'Tarea', priority:'media', stage:'idea',     date:'2025-05-22', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t004', title:'Analizar y Responder correo PleatPak',           desc:'', type:'Tarea', priority:'media', stage:'idea',     date:'2025-05-27', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t005', title:'Compra pasaje Ctg y Reserva Hotel',              desc:'', type:'Tarea', priority:'media', stage:'idea',     date:'2025-05-22', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t006', title:'Subir to do pago y cobro los Lagartos',          desc:'', type:'Tarea', priority:'alta',  stage:'progress', date:'2025-05-22', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t007', title:'Comprar Griferia Bano Social',                   desc:'', type:'Tarea', priority:'media', stage:'progress', date:'',           followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t008', title:'Comprar Regalo Dia de la Madre Laura',           desc:'', type:'Tarea', priority:'media', stage:'progress', date:'2025-05-27', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t009', title:'Buscar Ropa Golf Pedro con Puntos Colombia',     desc:'', type:'Tarea', priority:'media', stage:'progress', date:'2025-05-27', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t010', title:'Sueldo Jani',                                    desc:'', type:'Tarea', priority:'media', stage:'review',   date:'2025-05-23', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t011', title:'Msn Yiyo Kandeo con Avance',                    desc:'', type:'Tarea', priority:'baja',  stage:'review',   date:'2025-05-27', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t012', title:'Pago cuentas Laura',                             desc:'', type:'Tarea', priority:'media', stage:'review',   date:'2025-05-27', followup:false, followupDate:'', created:'2025-05-20' },
+  { id:'t013', title:'Pago predial BV',                                desc:'', type:'Tarea', priority:'media', stage:'review',   date:'2025-05-19', followup:false, followupDate:'', created:'2025-05-20' }
+];
+
+// ── ESTADO ────────────────────────────────────────────────
+let S = {
+  token: localStorage.getItem(TOKEN_KEY) || '',
+  tasks: [], fileSha: '',
+  view: 'kanban', tab: 'all', modal: null, editId: null, confirmDel: false,
+  syncStatus: 'idle',
+  calDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+  filter: { q:'', priority:'all', type:'all' },
+  form: { title:'', desc:'', type:'Tarea', priority:'media', stage:'idea', date:'', followup:false, followupDate:'' }
 };
+const TODAY = new Date();
 
-// ─── GITHUB API ───────────────────────────────────────────
-const API = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE}`;
+// ── GITHUB API ────────────────────────────────────────────
+const API = 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME + '/contents/' + DATA_FILE;
 
-async function ghLoad(){
+// Decodifica base64 con soporte correcto para UTF-8
+function b64ToUtf8(str) {
+  const bytes = Uint8Array.from(atob(str.replace(/\n/g, '')), c => c.charCodeAt(0));
+  return new TextDecoder('utf-8').decode(bytes);
+}
+
+// Codifica UTF-8 a base64 correctamente
+function utf8ToB64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let binary = '';
+  bytes.forEach(b => binary += String.fromCharCode(b));
+  return btoa(binary);
+}
+
+async function ghLoad() {
   setSyncStatus('loading');
-  try{
-    const r=await fetch(API+'?ref='+BRANCH+'&t='+Date.now(),{
-      headers:{Authorization:'token '+S.token, Accept:'application/vnd.github.v3+json'}
+  try {
+    const r = await fetch(API + '?ref=' + BRANCH + '&t=' + Date.now(), {
+      headers: { Authorization: 'token ' + S.token, Accept: 'application/vnd.github.v3+json' }
     });
-    if(r.status===404){
-      // Archivo no existe aún, usar seed y crear
-      S.tasks=[...SEED_TASKS];
-      S.fileSha='';
+    if (r.status === 404) {
+      S.tasks = [...SEED_TASKS];
+      S.fileSha = '';
       await ghSave();
       return true;
     }
-    if(!r.ok){ setSyncStatus('error'); return false; }
-    const data=await r.json();
-    S.fileSha=data.sha;
-    const content=JSON.parse(atob(data.content.replace(/\n/g,'')));
-    S.tasks=content.tasks||[];
+    if (!r.ok) { setSyncStatus('error'); return false; }
+    const data = await r.json();
+    S.fileSha = data.sha;
+    // Decodificacion correcta UTF-8
+    const json = b64ToUtf8(data.content);
+    const content = JSON.parse(json);
+    S.tasks = content.tasks || [];
     setSyncStatus('ok');
     return true;
-  }catch(e){ setSyncStatus('error'); return false; }
+  } catch(e) { console.error(e); setSyncStatus('error'); return false; }
 }
 
-async function ghSave(){
+async function ghSave() {
   setSyncStatus('loading');
-  try{
-    const content=btoa(unescape(encodeURIComponent(JSON.stringify({tasks:S.tasks},null,2))));
-    const body={message:'actualizar tareas '+new Date().toISOString(),content,branch:BRANCH};
-    if(S.fileSha) body.sha=S.fileSha;
-    const r=await fetch(API,{
-      method:'PUT',
-      headers:{Authorization:'token '+S.token,'Content-Type':'application/json',Accept:'application/vnd.github.v3+json'},
-      body:JSON.stringify(body)
+  try {
+    const json = JSON.stringify({ tasks: S.tasks }, null, 2);
+    // Codificacion correcta UTF-8
+    const content = utf8ToB64(json);
+    const body = { message: 'actualizar tareas ' + new Date().toISOString(), content, branch: BRANCH };
+    if (S.fileSha) body.sha = S.fileSha;
+    const r = await fetch(API, {
+      method: 'PUT',
+      headers: { Authorization: 'token ' + S.token, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+      body: JSON.stringify(body)
     });
-    if(!r.ok){ setSyncStatus('error'); return false; }
-    const data=await r.json();
-    S.fileSha=data.content.sha;
+    if (!r.ok) { setSyncStatus('error'); return false; }
+    const data = await r.json();
+    S.fileSha = data.content.sha;
     setSyncStatus('ok');
     return true;
-  }catch(e){ setSyncStatus('error'); return false; }
+  } catch(e) { console.error(e); setSyncStatus('error'); return false; }
 }
 
-async function validateToken(token){
-  const r=await fetch(API+'?ref='+BRANCH,{
-    headers:{Authorization:'token '+token, Accept:'application/vnd.github.v3+json'}
+async function validateToken(token) {
+  const r = await fetch(API + '?ref=' + BRANCH, {
+    headers: { Authorization: 'token ' + token, Accept: 'application/vnd.github.v3+json' }
   });
-  return r.status===200||r.status===404; // 404 = repo ok pero archivo no existe aún
+  return r.status === 200 || r.status === 404;
 }
 
-function setSyncStatus(s){ S.syncStatus=s; renderSyncBar(); }
+function setSyncStatus(s) { S.syncStatus = s; renderSyncBar(); }
 
-// ─── HELPERS ──────────────────────────────────────────────
-function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,5);}
-function fmt(d){if(!d)return'';const x=d instanceof Date?d:new Date(d+'T00:00:00');return x.toISOString().slice(0,10);}
-function disp(s){if(!s)return'';return new Date(s+'T00:00:00').toLocaleDateString('es-CO',{day:'numeric',month:'short'});}
-function overdue(s){return s&&s<fmt(TODAY);}
-function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function q(s){return document.querySelector(s);}
-function pct(){const d=S.tasks.filter(t=>t.stage==='done').length;return S.tasks.length?Math.round(d/S.tasks.length*100):0;}
+// ── HELPERS ───────────────────────────────────────────────
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
+function fmt(d) { if (!d) return ''; const x = d instanceof Date ? d : new Date(d + 'T00:00:00'); return x.toISOString().slice(0,10); }
+function disp(s) { if (!s) return ''; return new Date(s + 'T00:00:00').toLocaleDateString('es-CO', { day:'numeric', month:'short' }); }
+function overdue(s) { return s && s < fmt(TODAY); }
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function q(s) { return document.querySelector(s); }
+function pct() { const d = S.tasks.filter(t => t.stage === 'done').length; return S.tasks.length ? Math.round(d / S.tasks.length * 100) : 0; }
+function isPersonal(t) { return t.type === 'Tarea Personal'; }
 
-function filtered(){
-  let t=[...S.tasks];
-  const tod=fmt(TODAY),we=fmt(new Date(TODAY.getTime()+6*864e5));
-  if(S.tab==='hoy')t=t.filter(x=>x.date===tod);
-  else if(S.tab==='semana')t=t.filter(x=>x.date&&x.date>=tod&&x.date<=we);
-  else if(S.tab==='seg')t=t.filter(x=>x.followup);
-  if(S.filter.priority!=='all')t=t.filter(x=>x.priority===S.filter.priority);
-  if(S.filter.type!=='all')t=t.filter(x=>x.type===S.filter.type);
-  if(S.filter.q){const qv=S.filter.q.toLowerCase();t=t.filter(x=>x.title.toLowerCase().includes(qv)||(x.desc||'').toLowerCase().includes(qv));}
+function filtered() {
+  let t = [...S.tasks];
+  const tod = fmt(TODAY), we = fmt(new Date(TODAY.getTime() + 6*864e5));
+  if (S.tab === 'hoy')         t = t.filter(x => x.date === tod);
+  else if (S.tab === 'semana') t = t.filter(x => x.date && x.date >= tod && x.date <= we);
+  else if (S.tab === 'seg')    t = t.filter(x => x.followup);
+  if (S.filter.priority !== 'all') t = t.filter(x => x.priority === S.filter.priority);
+  if (S.filter.type !== 'all')     t = t.filter(x => x.type === S.filter.type);
+  if (S.filter.q) { const qv = S.filter.q.toLowerCase(); t = t.filter(x => x.title.toLowerCase().includes(qv) || (x.desc||'').toLowerCase().includes(qv)); }
   return t;
 }
 
-function openNew(stage){S.form={title:'',desc:'',type:'Tarea',priority:'media',stage:stage||'idea',date:'',followup:false,followupDate:''};S.modal='new';S.confirmDel=false;render();}
-function openEdit(task){S.form={...task};S.editId=task.id;S.modal='edit';S.confirmDel=false;render();}
-function syncForm(){
-  const f=S.form;
-  f.title=q('#ft')?.value||f.title; f.desc=q('#fd')?.value||'';
-  f.type=q('#ftype')?.value||f.type; f.stage=q('#fstage')?.value||f.stage;
-  f.date=q('#fdate')?.value||''; f.followup=q('#ffol')?.checked||false; f.followupDate=q('#ffoldate')?.value||'';
+function openNew(stage) {
+  S.form = { title:'', desc:'', type:'Tarea', priority:'media', stage: stage||'idea', date:'', followup:false, followupDate:'' };
+  S.modal = 'new'; S.confirmDel = false; render();
 }
-async function saveTask(){
-  if(!S.form.title.trim())return;
-  if(S.modal==='new'){S.tasks.push({...S.form,id:uid(),created:fmt(TODAY)});}
-  else{const i=S.tasks.findIndex(t=>t.id===S.editId);if(i>-1)S.tasks[i]={...S.tasks[i],...S.form};}
-  S.modal=null; render();
+function openEdit(task) { S.form = {...task}; S.editId = task.id; S.modal = 'edit'; S.confirmDel = false; render(); }
+function syncForm() {
+  const f = S.form;
+  f.title        = q('#ft')?.value      || f.title;
+  f.desc         = q('#fd')?.value      || '';
+  f.type         = q('#ftype')?.value   || f.type;
+  f.stage        = q('#fstage')?.value  || f.stage;
+  f.date         = q('#fdate')?.value   || '';
+  f.followup     = q('#ffol')?.checked  || false;
+  f.followupDate = q('#ffoldate')?.value || '';
+}
+async function saveTask() {
+  if (!S.form.title.trim()) return;
+  if (S.modal === 'new') { S.tasks.push({...S.form, id: uid(), created: fmt(TODAY)}); }
+  else { const i = S.tasks.findIndex(t => t.id === S.editId); if (i > -1) S.tasks[i] = {...S.tasks[i], ...S.form}; }
+  S.modal = null; render();
   await ghSave();
 }
-async function delTask(){
-  S.tasks=S.tasks.filter(t=>t.id!==S.editId);
-  S.modal=null;S.confirmDel=false;render();
+async function delTask() {
+  S.tasks = S.tasks.filter(t => t.id !== S.editId);
+  S.modal = null; S.confirmDel = false; render();
   await ghSave();
 }
-async function toggleDone(id){
-  const t=S.tasks.find(t=>t.id===id);
-  if(t){t.stage=t.stage==='done'?'idea':'done';render();await ghSave();}
+async function toggleDone(id) {
+  const t = S.tasks.find(t => t.id === id);
+  if (t) { t.stage = t.stage === 'done' ? 'idea' : 'done'; render(); await ghSave(); }
 }
 
-// ─── RENDER ───────────────────────────────────────────────
-function renderSyncBar(){
-  const bar=q('#sync-bar');
-  if(!bar)return;
-  const icons={idle:'ti-cloud',loading:'ti-loader-2',ok:'ti-cloud-check',error:'ti-cloud-x'};
-  const texts={idle:'Conectado a GitHub',loading:'Guardando...',ok:'Guardado en GitHub',error:'Error al guardar'};
-  const cls={idle:'',loading:'sync-loading',ok:'sync-ok',error:'sync-err'};
-  bar.innerHTML=`<i class="ti ${icons[S.syncStatus]} ${cls[S.syncStatus]}"></i><span class="${cls[S.syncStatus]}">${texts[S.syncStatus]}</span><button class="logout-btn" id="btn-logout"><i class="ti ti-logout"></i>Cambiar token</button>`;
-  q('#btn-logout')?.addEventListener('click',()=>{localStorage.removeItem(TOKEN_KEY);S.token='';S.tasks=[];render();});
+// ── RENDER ────────────────────────────────────────────────
+function renderSyncBar() {
+  const bar = q('#sync-bar');
+  if (!bar) return;
+  const icons = { idle:'ti-cloud', loading:'ti-loader-2', ok:'ti-cloud-check', error:'ti-cloud-x' };
+  const texts = { idle:'Conectado a GitHub', loading:'Guardando...', ok:'Guardado en GitHub', error:'Error al guardar' };
+  const cls   = { idle:'', loading:'sync-loading', ok:'sync-ok', error:'sync-err' };
+  bar.innerHTML = '<i class="ti ' + icons[S.syncStatus] + ' ' + cls[S.syncStatus] + '"></i><span class="' + cls[S.syncStatus] + '">' + texts[S.syncStatus] + '</span><button class="logout-btn" id="btn-logout"><i class="ti ti-logout"></i>Cambiar token</button>';
+  q('#btn-logout')?.addEventListener('click', () => { localStorage.removeItem(TOKEN_KEY); S.token = ''; S.tasks = []; render(); });
 }
 
-function render(){
-  if(!S.token){ document.getElementById('root').innerHTML=renderTokenScreen(); bindToken(); return; }
-  document.getElementById('root').innerHTML=renderApp();
+function render() {
+  if (!S.token) { document.getElementById('root').innerHTML = renderTokenScreen(); bindToken(); return; }
+  document.getElementById('root').innerHTML = renderApp();
   bind();
   renderSyncBar();
 }
 
-function renderTokenScreen(){
-  return`<div class="token-screen">
-    <div class="token-card">
-      <div class="token-logo"><i class="ti ti-command"></i><span>Mi Centro de Control</span></div>
-      <p class="token-desc">Para sincronizar tus tareas en todos tus dispositivos necesitas tu <strong>GitHub Personal Access Token</strong>.</p>
-      <input class="token-input" id="token-inp" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
-      <p class="token-hint">Ve a GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic). Crea uno con scope <strong>repo</strong>.</p>
-      <div class="token-error" id="token-err">Token inv\u00e1lido. Verifica que tenga el scope <strong>repo</strong>.</div>
-      <button class="btn btn-primary" id="btn-token-ok" style="width:100%;justify-content:center"><i class="ti ti-key"></i>Conectar y cargar tareas</button>
-    </div>
-  </div>`;
+function renderTokenScreen() {
+  return '<div class="token-screen"><div class="token-card">' +
+    '<div class="token-logo"><i class="ti ti-command"></i><span>Mi Centro de Control</span></div>' +
+    '<p class="token-desc">Para sincronizar tus tareas en todos tus dispositivos necesitas tu <strong>GitHub Personal Access Token</strong>.</p>' +
+    '<input class="token-input" id="token-inp" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">' +
+    '<p class="token-hint">Ve a GitHub &rarr; Settings &rarr; Developer settings &rarr; Personal access tokens &rarr; Tokens (classic). Crea uno con scope <strong>repo</strong>.</p>' +
+    '<div class="token-error" id="token-err">Token invalido. Verifica que tenga el scope <strong>repo</strong>.</div>' +
+    '<button class="btn btn-primary" id="btn-token-ok" style="width:100%;justify-content:center"><i class="ti ti-key"></i>Conectar y cargar tareas</button>' +
+    '</div></div>';
 }
 
-function bindToken(){
-  q('#btn-token-ok')?.addEventListener('click', async()=>{
-    const val=q('#token-inp')?.value?.trim();
-    if(!val)return;
-    q('#btn-token-ok').innerHTML='<i class="ti ti-loader-2"></i>Verificando...';
-    q('#btn-token-ok').disabled=true;
-    const ok=await validateToken(val);
-    if(ok){
-      S.token=val;
-      localStorage.setItem(TOKEN_KEY,val);
+function bindToken() {
+  q('#btn-token-ok')?.addEventListener('click', async () => {
+    const val = q('#token-inp')?.value?.trim();
+    if (!val) return;
+    q('#btn-token-ok').innerHTML = '<i class="ti ti-loader-2"></i>Verificando...';
+    q('#btn-token-ok').disabled = true;
+    const ok = await validateToken(val);
+    if (ok) {
+      S.token = val;
+      localStorage.setItem(TOKEN_KEY, val);
       render();
       await ghLoad();
       render();
-    }else{
-      q('#token-err').style.display='block';
-      q('#btn-token-ok').innerHTML='<i class="ti ti-key"></i>Conectar y cargar tareas';
-      q('#btn-token-ok').disabled=false;
+    } else {
+      q('#token-err').style.display = 'block';
+      q('#btn-token-ok').innerHTML = '<i class="ti ti-key"></i>Conectar y cargar tareas';
+      q('#btn-token-ok').disabled = false;
     }
   });
-  q('#token-inp')?.addEventListener('keydown',e=>{if(e.key==='Enter')q('#btn-token-ok')?.click();});
+  q('#token-inp')?.addEventListener('keydown', e => { if (e.key === 'Enter') q('#btn-token-ok')?.click(); });
 }
 
-function renderApp(){
-  const tasks=filtered();
-  const tod=fmt(TODAY),we=fmt(new Date(TODAY.getTime()+6*864e5));
-  const counts={all:S.tasks.length,hoy:S.tasks.filter(t=>t.date===tod).length,semana:S.tasks.filter(t=>t.date&&t.date>=tod&&t.date<=we).length,seg:S.tasks.filter(t=>t.followup).length};
-  const tabs=[{id:'all',label:'Todo',icon:'ti-layout-list'},{id:'hoy',label:'Hoy',icon:'ti-calendar-today'},{id:'semana',label:'Esta semana',icon:'ti-calendar-week'},{id:'seg',label:'Seguimientos',icon:'ti-refresh'}];
-  return`<div class="app">
-  <div class="sync-bar" id="sync-bar"></div>
-  <div class="header">
-    <div class="logo"><i class="ti ti-command"></i>Mi Centro de Control</div>
-    <div class="header-actions">
-      <button class="btn view-btn${S.view==='kanban'?' active':''}" data-v="kanban" title="Kanban"><i class="ti ti-layout-columns"></i></button>
-      <button class="btn view-btn${S.view==='list'?' active':''}" data-v="list" title="Lista"><i class="ti ti-list"></i></button>
-      <button class="btn view-btn${S.view==='cal'?' active':''}" data-v="cal" title="Calendario"><i class="ti ti-calendar"></i></button>
-      <button class="btn btn-primary" id="btn-new"><i class="ti ti-plus"></i>Nueva tarea</button>
-    </div>
-  </div>
-  <div class="tabs">${tabs.map(t=>`<div class="tab${S.tab===t.id?' active':''}" data-tab="${t.id}"><i class="ti ${t.icon}"></i>${t.label}<span class="cnt">${counts[t.id]}</span></div>`).join('')}</div>
-  <div class="content">
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label"><i class="ti ti-checklist"></i>Total tareas</div><div class="stat-value">${S.tasks.length}</div><div class="stat-sub">${pct()}% completado</div></div>
-      <div class="stat-card"><div class="stat-label"><i class="ti ti-circle-check"></i>Completadas</div><div class="stat-value">${S.tasks.filter(t=>t.stage==='done').length}</div><div class="stat-sub">de ${S.tasks.length}</div></div>
-      <div class="stat-card"><div class="stat-label"><i class="ti ti-flame"></i>Prioridad alta</div><div class="stat-value">${S.tasks.filter(t=>t.priority==='alta'&&t.stage!=='done').length}</div><div class="stat-sub">pendientes</div></div>
-      <div class="stat-card"><div class="stat-label"><i class="ti ti-refresh"></i>Seguimientos</div><div class="stat-value">${S.tasks.filter(t=>t.followup&&t.stage!=='done').length}</div><div class="stat-sub">activos</div></div>
-    </div>
-    <div class="filters">
-      <input class="search-input" id="sq" placeholder="Buscar tareas..." value="${esc(S.filter.q)}">
-      <select class="filter-sel" id="fp"><option value="all">Todas las prioridades</option><option value="alta"${S.filter.priority==='alta'?' selected':''}>Alta</option><option value="media"${S.filter.priority==='media'?' selected':''}>Media</option><option value="baja"${S.filter.priority==='baja'?' selected':''}>Baja</option></select>
-      <select class="filter-sel" id="ft2"><option value="all">Todos los tipos</option>${TYPES.map(t=>`<option value="${t}"${S.filter.type===t?' selected':''}>${t}</option>`).join('')}</select>
-    </div>
-    ${S.view==='kanban'?kanban(tasks):S.view==='list'?listV(tasks):calendar()}
-  </div>
-  ${S.modal?modal():''}
-</div>`;
+function renderApp() {
+  const tasks = filtered();
+  const tod = fmt(TODAY), we = fmt(new Date(TODAY.getTime() + 6*864e5));
+  const counts = {
+    all:    S.tasks.length,
+    hoy:    S.tasks.filter(t => t.date === tod).length,
+    semana: S.tasks.filter(t => t.date && t.date >= tod && t.date <= we).length,
+    seg:    S.tasks.filter(t => t.followup).length
+  };
+  const tabs = [
+    { id:'all',    label:'Todo',         icon:'ti-layout-list' },
+    { id:'hoy',    label:'Hoy',          icon:'ti-calendar-today' },
+    { id:'semana', label:'Esta semana',  icon:'ti-calendar-week' },
+    { id:'seg',    label:'Seguimientos', icon:'ti-refresh' }
+  ];
+
+  let html = '<div class="app">';
+  html += '<div class="sync-bar" id="sync-bar"></div>';
+  html += '<div class="header"><div class="logo"><i class="ti ti-command"></i>Mi Centro de Control</div><div class="header-actions">';
+  html += '<button class="btn view-btn' + (S.view==='kanban'?' active':'') + '" data-v="kanban" title="Kanban"><i class="ti ti-layout-columns"></i></button>';
+  html += '<button class="btn view-btn' + (S.view==='list'?' active':'') + '" data-v="list" title="Lista"><i class="ti ti-list"></i></button>';
+  html += '<button class="btn view-btn' + (S.view==='cal'?' active':'') + '" data-v="cal" title="Calendario"><i class="ti ti-calendar"></i></button>';
+  html += '<button class="btn btn-primary" id="btn-new"><i class="ti ti-plus"></i>Nueva tarea</button>';
+  html += '</div></div>';
+  html += '<div class="tabs">' + tabs.map(t => '<div class="tab' + (S.tab===t.id?' active':'') + '" data-tab="' + t.id + '"><i class="ti ' + t.icon + '"></i>' + t.label + '<span class="cnt">' + counts[t.id] + '</span></div>').join('') + '</div>';
+  html += '<div class="content">';
+  html += '<div class="stats-grid">';
+  html += '<div class="stat-card"><div class="stat-label"><i class="ti ti-checklist"></i>Total tareas</div><div class="stat-value">' + S.tasks.length + '</div><div class="stat-sub">' + pct() + '% completado</div></div>';
+  html += '<div class="stat-card"><div class="stat-label"><i class="ti ti-circle-check"></i>Completadas</div><div class="stat-value">' + S.tasks.filter(t=>t.stage==='done').length + '</div><div class="stat-sub">de ' + S.tasks.length + '</div></div>';
+  html += '<div class="stat-card"><div class="stat-label"><i class="ti ti-flame"></i>Prioridad alta</div><div class="stat-value">' + S.tasks.filter(t=>t.priority==='alta'&&t.stage!=='done').length + '</div><div class="stat-sub">pendientes</div></div>';
+  html += '<div class="stat-card"><div class="stat-label"><i class="ti ti-refresh"></i>Seguimientos</div><div class="stat-value">' + S.tasks.filter(t=>t.followup&&t.stage!=='done').length + '</div><div class="stat-sub">activos</div></div>';
+  html += '</div>';
+
+  // Filtros
+  let typeOptions = '<option value="all">Todos los tipos</option>';
+  TYPES.forEach(t => { typeOptions += '<option value="' + t + '"' + (S.filter.type===t?' selected':'') + '>' + t + '</option>'; });
+
+  html += '<div class="filters">';
+  html += '<input class="search-input" id="sq" placeholder="Buscar tareas..." value="' + esc(S.filter.q) + '">';
+  html += '<select class="filter-sel" id="fp"><option value="all">Todas las prioridades</option><option value="alta"' + (S.filter.priority==='alta'?' selected':'') + '>Alta</option><option value="media"' + (S.filter.priority==='media'?' selected':'') + '>Media</option><option value="baja"' + (S.filter.priority==='baja'?' selected':'') + '>Baja</option></select>';
+  html += '<select class="filter-sel" id="ft2">' + typeOptions + '</select>';
+  html += '</div>';
+
+  html += S.view==='kanban' ? kanban(tasks) : S.view==='list' ? listV(tasks) : calendar();
+  html += '</div>';
+  html += S.modal ? modal() : '';
+  html += '</div>';
+  return html;
 }
 
-function card(t){
-  const od=overdue(t.date)&&t.stage!=='done';
-  return`<div class="task-card" data-id="${t.id}">
-    <div class="task-title">${esc(t.title)}</div>
-    <div class="task-meta">
-      <span class="badge badge-${t.priority}">${t.priority.charAt(0).toUpperCase()+t.priority.slice(1)}</span>
-      <span class="badge badge-type">${t.type}</span>
-      ${t.followup?'<span class="badge badge-seg"><i class="ti ti-refresh" style="font-size:10px"></i></span>':''}
-      ${t.date?`<span class="task-date${od?' overdue':''}"><i class="ti ti-calendar" style="font-size:10px"></i>${disp(t.date)}</span>`:''}
-    </div>
-  </div>`;
-}
-
-function kanban(tasks){
-  return`<div class="kanban">${STAGES.map(s=>{
-    const st=tasks.filter(t=>t.stage===s.id);
-    return`<div class="stage-col">
-      <div class="stage-hdr"><span class="stage-dot" style="background:${s.color}"></span><span class="stage-name">${s.name}</span><span class="stage-cnt">${st.length}</span></div>
-      ${st.length?st.map(t=>card(t)).join(''):'<div style="text-align:center;padding:18px 0;font-size:12px;color:var(--text3)">Sin tareas</div>'}
-      <button class="add-btn" data-stage="${s.id}"><i class="ti ti-plus"></i>Agregar</button>
-    </div>`;
-  }).join('')}</div>`;
-}
-
-function listV(tasks){
-  if(!tasks.length)return`<div class="empty"><i class="ti ti-inbox"></i><p>Sin tareas en esta vista</p></div>`;
-  const po={alta:0,media:1,baja:2};
-  return`<div class="list-view">${[...tasks].sort((a,b)=>(po[a.priority]||1)-(po[b.priority]||1)).map(t=>`
-    <div class="list-item" data-id="${t.id}">
-      <div class="check-circle${t.stage==='done'?' done':''}" data-chk="${t.id}">${t.stage==='done'?'<i class="ti ti-check"></i>':''}</div>
-      <span class="list-title${t.stage==='done'?' done':''}">${esc(t.title)}</span>
-      <div class="list-meta">
-        <span class="badge badge-${t.priority}">${t.priority}</span>
-        <span class="badge badge-type">${t.type}</span>
-        ${t.followup?'<span class="badge badge-seg">seguim.</span>':''}
-        ${t.date?`<span class="task-date${overdue(t.date)&&t.stage!=='done'?' overdue':''}" style="font-size:11px">${disp(t.date)}</span>`:''}
-      </div>
-    </div>`).join('')}</div>`;
-}
-
-function calendar(){
-  const y=S.calDate.getFullYear(),m=S.calDate.getMonth();
-  const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();
-  const mn=S.calDate.toLocaleDateString('es-CO',{month:'long',year:'numeric'});
-  const byDate={};S.tasks.forEach(t=>{if(t.date){if(!byDate[t.date])byDate[t.date]=[];byDate[t.date].push(t);}});
-  const off=(first+6)%7;let cells='';
-  for(let i=0;i<off;i++){const d=new Date(y,m,1-off+i);cells+=`<div class="cal-day other"><div class="day-n">${d.getDate()}</div></div>`;}
-  for(let d=1;d<=days;d++){
-    const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const isT=ds===fmt(TODAY),dt=byDate[ds]||[];
-    cells+=`<div class="cal-day${isT?' today':''}"><div class="day-n">${d}</div>${dt.slice(0,3).map(t=>`<div class="cal-dot ${t.priority}" data-id="${t.id}">${esc(t.title)}</div>`).join('')}${dt.length>3?`<div style="font-size:10px;color:var(--text3)">+${dt.length-3}</div>`:''}</div>`;
+function card(t) {
+  const od = overdue(t.date) && t.stage !== 'done';
+  const personal = isPersonal(t);
+  let html = '<div class="task-card' + (personal?' personal':'') + '" data-id="' + t.id + '">';
+  html += '<div class="task-title">' + esc(t.title) + '</div>';
+  html += '<div class="task-meta">';
+  html += '<span class="badge badge-' + t.priority + '">' + t.priority.charAt(0).toUpperCase() + t.priority.slice(1) + '</span>';
+  if (personal) {
+    html += '<span class="badge badge-personal"><i class="ti ti-home" style="font-size:10px"></i> Personal</span>';
+  } else {
+    html += '<span class="badge badge-type">' + t.type + '</span>';
   }
-  const rem=(7-((off+days)%7))%7;for(let i=1;i<=rem;i++)cells+=`<div class="cal-day other"><div class="day-n">${i}</div></div>`;
-  return`<div class="calendar">
-    <div class="cal-hdr">
-      <button class="btn" id="cal-p" style="padding:5px 8px"><i class="ti ti-chevron-left"></i></button>
-      <span class="cal-month">${mn.charAt(0).toUpperCase()+mn.slice(1)}</span>
-      <button class="btn" id="cal-n" style="padding:5px 8px"><i class="ti ti-chevron-right"></i></button>
-    </div>
-    <div class="cal-grid">${['Lun','Mar','Mi\u00e9','Jue','Vie','S\u00e1b','Dom'].map(d=>`<div class="cal-lbl">${d}</div>`).join('')}${cells}</div>
-  </div>`;
+  if (t.followup) html += '<span class="badge badge-seg"><i class="ti ti-refresh" style="font-size:10px"></i></span>';
+  if (t.date) html += '<span class="task-date' + (od?' overdue':'') + '"><i class="ti ti-calendar" style="font-size:10px"></i>' + disp(t.date) + '</span>';
+  html += '</div></div>';
+  return html;
 }
 
-function modal(){
-  const f=S.form,isEdit=S.modal==='edit';
-  if(S.confirmDel){return`<div class="overlay" id="ov">
-    <div class="modal" style="max-width:360px">
-      <div class="modal-hdr"><span class="modal-title" style="color:#A32D2D"><i class="ti ti-alert-triangle"></i> Eliminar tarea</span><button class="modal-close" id="mc"><i class="ti ti-x"></i></button></div>
-      <p class="confirm-body">\u00bfEst\u00e1s seguro que deseas eliminar esta tarea?</p>
-      <div class="confirm-task">"${esc(f.title)}"</div>
-      <div style="display:flex;gap:8px;justify-content:flex-end">
-        <button class="btn" id="cd-no">Cancelar</button>
-        <button class="btn btn-danger" id="cd-yes"><i class="ti ti-trash"></i> S\u00ed, eliminar</button>
-      </div>
-    </div>
-  </div>`;}
-  return`<div class="overlay" id="ov">
-    <div class="modal">
-      <div class="modal-hdr"><span class="modal-title">${isEdit?'Editar tarea':'Nueva tarea'}</span><button class="modal-close" id="mc"><i class="ti ti-x"></i></button></div>
-      <div class="form-grp"><label class="form-lbl">T\u00edtulo *</label><input class="form-inp" id="ft" placeholder="\u00bfQu\u00e9 necesitas hacer?" value="${esc(f.title)}"></div>
-      <div class="form-grp"><label class="form-lbl">Descripci\u00f3n / Notas</label><textarea class="form-ta" id="fd" placeholder="Detalles, contexto...">${esc(f.desc||'')}</textarea></div>
-      <div class="form-row">
-        <div class="form-grp"><label class="form-lbl">Tipo</label><select class="form-inp" id="ftype">${TYPES.map(t=>`<option${f.type===t?' selected':''}>${t}</option>`).join('')}</select></div>
-        <div class="form-grp"><label class="form-lbl">Etapa</label><select class="form-inp" id="fstage">${STAGES.map(s=>`<option value="${s.id}"${f.stage===s.id?' selected':''}>${s.name}</option>`).join('')}</select></div>
-      </div>
-      <div class="form-grp"><label class="form-lbl">Prioridad</label>
-        <div class="prio-opts">${['alta','media','baja'].map(p=>`<div class="prio-opt ${p}${f.priority===p?' sel':''}" data-p="${p}">${p.charAt(0).toUpperCase()+p.slice(1)}</div>`).join('')}</div>
-      </div>
-      <div class="form-row">
-        <div class="form-grp"><label class="form-lbl">Fecha l\u00edmite</label><input class="form-inp" id="fdate" type="date" value="${f.date||''}"></div>
-        <div class="form-grp"><label class="form-lbl">Seguimiento</label><div class="chk-row"><input type="checkbox" id="ffol"${f.followup?' checked':''}><label for="ffol">Requiere seguimiento</label></div></div>
-      </div>
-      ${f.followup?`<div class="form-grp"><label class="form-lbl">Fecha de seguimiento</label><input class="form-inp" id="ffoldate" type="date" value="${f.followupDate||''}"></div>`:''}
-      <div class="form-actions">
-        ${isEdit?`<button class="btn btn-danger" id="btn-del" style="margin-right:auto"><i class="ti ti-trash"></i> Eliminar</button>`:''}
-        <button class="btn" id="btn-cancel">Cancelar</button>
-        <button class="btn btn-primary" id="btn-save"><i class="ti ti-device-floppy"></i>${isEdit?'Guardar cambios':'Crear tarea'}</button>
-      </div>
-    </div>
-  </div>`;
+function kanban(tasks) {
+  let html = '<div class="kanban">';
+  STAGES.forEach(s => {
+    const st = tasks.filter(t => t.stage === s.id);
+    html += '<div class="stage-col">';
+    html += '<div class="stage-hdr"><span class="stage-dot" style="background:' + s.color + '"></span><span class="stage-name">' + s.name + '</span><span class="stage-cnt">' + st.length + '</span></div>';
+    if (st.length) { st.forEach(t => { html += card(t); }); }
+    else { html += '<div style="text-align:center;padding:18px 0;font-size:12px;color:var(--text3)">Sin tareas</div>'; }
+    html += '<button class="add-btn" data-stage="' + s.id + '"><i class="ti ti-plus"></i>Agregar</button>';
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
 }
 
-function bind(){
-  q('#btn-new')?.addEventListener('click',()=>openNew());
-  document.querySelectorAll('.tab').forEach(el=>el.addEventListener('click',()=>{S.tab=el.dataset.tab;render();}));
-  document.querySelectorAll('.view-btn').forEach(el=>el.addEventListener('click',()=>{S.view=el.dataset.v;render();}));
-  q('#sq')?.addEventListener('input',e=>{S.filter.q=e.target.value;render();});
-  q('#fp')?.addEventListener('change',e=>{S.filter.priority=e.target.value;render();});
-  q('#ft2')?.addEventListener('change',e=>{S.filter.type=e.target.value;render();});
-  document.querySelectorAll('.task-card,.cal-dot').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();const t=S.tasks.find(t=>t.id===el.dataset.id);if(t)openEdit(t);}));
-  document.querySelectorAll('.list-item').forEach(el=>el.addEventListener('click',e=>{if(e.target.dataset.chk)return;const t=S.tasks.find(t=>t.id===el.dataset.id);if(t)openEdit(t);}));
-  document.querySelectorAll('[data-chk]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();toggleDone(el.dataset.chk);}));
-  document.querySelectorAll('.add-btn').forEach(el=>el.addEventListener('click',()=>openNew(el.dataset.stage)));
-  q('#cal-p')?.addEventListener('click',()=>{S.calDate.setMonth(S.calDate.getMonth()-1);render();});
-  q('#cal-n')?.addEventListener('click',()=>{S.calDate.setMonth(S.calDate.getMonth()+1);render();});
-  if(S.modal){
-    const close=()=>{S.modal=null;S.confirmDel=false;render();};
-    q('#mc')?.addEventListener('click',close);
-    q('#ov')?.addEventListener('click',e=>{if(e.target===e.currentTarget)close();});
-    if(S.confirmDel){
-      q('#cd-no')?.addEventListener('click',()=>{S.confirmDel=false;render();});
-      q('#cd-yes')?.addEventListener('click',delTask);
-    }else{
-      q('#btn-cancel')?.addEventListener('click',close);
-      q('#btn-save')?.addEventListener('click',()=>{syncForm();saveTask();});
-      q('#btn-del')?.addEventListener('click',()=>{syncForm();S.confirmDel=true;render();});
-      q('#ffol')?.addEventListener('change',()=>{syncForm();render();});
-      document.querySelectorAll('.prio-opt').forEach(el=>el.addEventListener('click',()=>{S.form.priority=el.dataset.p;render();}));
-      setTimeout(()=>q('#ft')?.focus(),50);
+function listV(tasks) {
+  if (!tasks.length) return '<div class="empty"><i class="ti ti-inbox"></i><p>Sin tareas en esta vista</p></div>';
+  const po = { alta:0, media:1, baja:2 };
+  const sorted = [...tasks].sort((a,b) => (po[a.priority]||1) - (po[b.priority]||1));
+  let html = '<div class="list-view">';
+  sorted.forEach(t => {
+    const personal = isPersonal(t);
+    html += '<div class="list-item' + (personal?' personal':'') + '" data-id="' + t.id + '">';
+    html += '<div class="check-circle' + (t.stage==='done'?' done':'') + '" data-chk="' + t.id + '">' + (t.stage==='done'?'<i class="ti ti-check"></i>':'') + '</div>';
+    html += '<span class="list-title' + (t.stage==='done'?' done':'') + '">' + esc(t.title) + '</span>';
+    html += '<div class="list-meta">';
+    html += '<span class="badge badge-' + t.priority + '">' + t.priority + '</span>';
+    html += personal ? '<span class="badge badge-personal">Personal</span>' : '<span class="badge badge-type">' + t.type + '</span>';
+    if (t.followup) html += '<span class="badge badge-seg">seguim.</span>';
+    if (t.date) html += '<span class="task-date' + (overdue(t.date)&&t.stage!=='done'?' overdue':'') + '" style="font-size:11px">' + disp(t.date) + '</span>';
+    html += '</div></div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function calendar() {
+  const y = S.calDate.getFullYear(), m = S.calDate.getMonth();
+  const first = new Date(y,m,1).getDay(), days = new Date(y,m+1,0).getDate();
+  const mn = S.calDate.toLocaleDateString('es-CO', { month:'long', year:'numeric' });
+  const byDate = {};
+  S.tasks.forEach(t => { if (t.date) { if (!byDate[t.date]) byDate[t.date]=[]; byDate[t.date].push(t); } });
+  const off = (first+6)%7;
+  let cells = '';
+  for (let i=0; i<off; i++) { const d = new Date(y,m,1-off+i); cells += '<div class="cal-day other"><div class="day-n">' + d.getDate() + '</div></div>'; }
+  for (let d=1; d<=days; d++) {
+    const ds = y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+    const isT = ds === fmt(TODAY), dt = byDate[ds]||[];
+    cells += '<div class="cal-day' + (isT?' today':'') + '"><div class="day-n">' + d + '</div>';
+    dt.slice(0,3).forEach(t => {
+      const cls = isPersonal(t) ? 'personal-dot' : t.priority;
+      cells += '<div class="cal-dot ' + cls + '" data-id="' + t.id + '">' + esc(t.title) + '</div>';
+    });
+    if (dt.length > 3) cells += '<div style="font-size:10px;color:var(--text3)">+' + (dt.length-3) + '</div>';
+    cells += '</div>';
+  }
+  const rem = (7-((off+days)%7))%7;
+  for (let i=1; i<=rem; i++) cells += '<div class="cal-day other"><div class="day-n">' + i + '</div></div>';
+
+  const dayLabels = ['Lun','Mar','Mie','Jue','Vie','Sab','Dom'];
+  let html = '<div class="calendar"><div class="cal-hdr">';
+  html += '<button class="btn" id="cal-p" style="padding:5px 8px"><i class="ti ti-chevron-left"></i></button>';
+  html += '<span class="cal-month">' + mn.charAt(0).toUpperCase() + mn.slice(1) + '</span>';
+  html += '<button class="btn" id="cal-n" style="padding:5px 8px"><i class="ti ti-chevron-right"></i></button>';
+  html += '</div><div class="cal-grid">';
+  dayLabels.forEach(d => { html += '<div class="cal-lbl">' + d + '</div>'; });
+  html += cells + '</div></div>';
+  return html;
+}
+
+function modal() {
+  const f = S.form, isEdit = S.modal === 'edit';
+  if (S.confirmDel) {
+    return '<div class="overlay" id="ov"><div class="modal" style="max-width:360px">' +
+      '<div class="modal-hdr"><span class="modal-title" style="color:#A32D2D"><i class="ti ti-alert-triangle"></i> Eliminar tarea</span><button class="modal-close" id="mc"><i class="ti ti-x"></i></button></div>' +
+      '<p class="confirm-body">Esta seguro que deseas eliminar esta tarea?</p>' +
+      '<div class="confirm-task">"' + esc(f.title) + '"</div>' +
+      '<div style="display:flex;gap:8px;justify-content:flex-end">' +
+      '<button class="btn" id="cd-no">Cancelar</button>' +
+      '<button class="btn btn-danger" id="cd-yes"><i class="ti ti-trash"></i> Si, eliminar</button>' +
+      '</div></div></div>';
+  }
+
+  let typeOpts = '';
+  TYPES.forEach(t => { typeOpts += '<option value="' + t + '"' + (f.type===t?' selected':'') + '>' + t + '</option>'; });
+
+  let stageOpts = '';
+  STAGES.forEach(s => { stageOpts += '<option value="' + s.id + '"' + (f.stage===s.id?' selected':'') + '>' + s.name + '</option>'; });
+
+  let html = '<div class="overlay" id="ov"><div class="modal">';
+  html += '<div class="modal-hdr"><span class="modal-title">' + (isEdit?'Editar tarea':'Nueva tarea') + '</span><button class="modal-close" id="mc"><i class="ti ti-x"></i></button></div>';
+  html += '<div class="form-grp"><label class="form-lbl">Titulo *</label><input class="form-inp" id="ft" placeholder="Que necesitas hacer?" value="' + esc(f.title) + '"></div>';
+  html += '<div class="form-grp"><label class="form-lbl">Descripcion / Notas</label><textarea class="form-ta" id="fd" placeholder="Detalles, contexto...">' + esc(f.desc||'') + '</textarea></div>';
+  html += '<div class="form-row">';
+  html += '<div class="form-grp"><label class="form-lbl">Tipo</label><select class="form-inp" id="ftype">' + typeOpts + '</select></div>';
+  html += '<div class="form-grp"><label class="form-lbl">Etapa</label><select class="form-inp" id="fstage">' + stageOpts + '</select></div>';
+  html += '</div>';
+  html += '<div class="form-grp"><label class="form-lbl">Prioridad</label><div class="prio-opts">';
+  ['alta','media','baja'].forEach(p => {
+    html += '<div class="prio-opt ' + p + (f.priority===p?' sel':'') + '" data-p="' + p + '">' + p.charAt(0).toUpperCase() + p.slice(1) + '</div>';
+  });
+  html += '</div></div>';
+  html += '<div class="form-row">';
+  html += '<div class="form-grp"><label class="form-lbl">Fecha limite</label><input class="form-inp" id="fdate" type="date" value="' + (f.date||'') + '"></div>';
+  html += '<div class="form-grp"><label class="form-lbl">Seguimiento</label><div class="chk-row"><input type="checkbox" id="ffol"' + (f.followup?' checked':'') + '><label for="ffol">Requiere seguimiento</label></div></div>';
+  html += '</div>';
+  if (f.followup) html += '<div class="form-grp"><label class="form-lbl">Fecha de seguimiento</label><input class="form-inp" id="ffoldate" type="date" value="' + (f.followupDate||'') + '"></div>';
+  html += '<div class="form-actions">';
+  if (isEdit) html += '<button class="btn btn-danger" id="btn-del" style="margin-right:auto"><i class="ti ti-trash"></i> Eliminar</button>';
+  html += '<button class="btn" id="btn-cancel">Cancelar</button>';
+  html += '<button class="btn btn-primary" id="btn-save"><i class="ti ti-device-floppy"></i>' + (isEdit?'Guardar cambios':'Crear tarea') + '</button>';
+  html += '</div></div></div>';
+  return html;
+}
+
+function bind() {
+  q('#btn-new')?.addEventListener('click', () => openNew());
+  document.querySelectorAll('.tab').forEach(el => el.addEventListener('click', () => { S.tab = el.dataset.tab; render(); }));
+  document.querySelectorAll('.view-btn').forEach(el => el.addEventListener('click', () => { S.view = el.dataset.v; render(); }));
+  q('#sq')?.addEventListener('input', e => { S.filter.q = e.target.value; render(); });
+  q('#fp')?.addEventListener('change', e => { S.filter.priority = e.target.value; render(); });
+  q('#ft2')?.addEventListener('change', e => { S.filter.type = e.target.value; render(); });
+  document.querySelectorAll('.task-card,.cal-dot').forEach(el => el.addEventListener('click', e => { e.stopPropagation(); const t = S.tasks.find(t => t.id === el.dataset.id); if (t) openEdit(t); }));
+  document.querySelectorAll('.list-item').forEach(el => el.addEventListener('click', e => { if (e.target.dataset.chk) return; const t = S.tasks.find(t => t.id === el.dataset.id); if (t) openEdit(t); }));
+  document.querySelectorAll('[data-chk]').forEach(el => el.addEventListener('click', e => { e.stopPropagation(); toggleDone(el.dataset.chk); }));
+  document.querySelectorAll('.add-btn').forEach(el => el.addEventListener('click', () => openNew(el.dataset.stage)));
+  q('#cal-p')?.addEventListener('click', () => { S.calDate.setMonth(S.calDate.getMonth()-1); render(); });
+  q('#cal-n')?.addEventListener('click', () => { S.calDate.setMonth(S.calDate.getMonth()+1); render(); });
+  if (S.modal) {
+    const close = () => { S.modal = null; S.confirmDel = false; render(); };
+    q('#mc')?.addEventListener('click', close);
+    q('#ov')?.addEventListener('click', e => { if (e.target === e.currentTarget) close(); });
+    if (S.confirmDel) {
+      q('#cd-no')?.addEventListener('click', () => { S.confirmDel = false; render(); });
+      q('#cd-yes')?.addEventListener('click', delTask);
+    } else {
+      q('#btn-cancel')?.addEventListener('click', close);
+      q('#btn-save')?.addEventListener('click', () => { syncForm(); saveTask(); });
+      q('#btn-del')?.addEventListener('click', () => { syncForm(); S.confirmDel = true; render(); });
+      q('#ffol')?.addEventListener('change', () => { syncForm(); render(); });
+      document.querySelectorAll('.prio-opt').forEach(el => el.addEventListener('click', () => { S.form.priority = el.dataset.p; render(); }));
+      setTimeout(() => q('#ft')?.focus(), 50);
     }
   }
 }
 
-// ─── INICIO ───────────────────────────────────────────────
+// ── INICIO ────────────────────────────────────────────────
 render();
-if(S.token){
-  ghLoad().then(()=>render());
-}
+if (S.token) { ghLoad().then(() => render()); }
 </script>
 </body>
 </html>
