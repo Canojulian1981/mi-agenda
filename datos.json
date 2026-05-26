@@ -251,6 +251,18 @@
       "followupDate": "",
       "id": "mphg2r635nm",
       "created": "2026-05-22"
+    },
+    {
+      "title": "Reunion rebate Lagartos",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "2026-05-26",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpm2k8i1on2",
+      "created": "2026-05-26"
     }
   ]
 }
