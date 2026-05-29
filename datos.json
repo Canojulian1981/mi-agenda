@@ -275,6 +275,18 @@
       "followupDate": "",
       "id": "mpm2xxjiadt",
       "created": "2026-05-26"
+    },
+    {
+      "title": "Pagar 200.000 a carlos vecino",
+      "desc": "",
+      "type": "Tarea Personal",
+      "priority": "alta",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpqg6rk5x1h",
+      "created": "2026-05-29"
     }
   ]
 }
