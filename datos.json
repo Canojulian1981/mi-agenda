@@ -275,6 +275,18 @@
       "followupDate": "",
       "id": "mpqg6rk5x1h",
       "created": "2026-05-29"
+    },
+    {
+      "title": "Meter token en dropbok",
+      "desc": "",
+      "type": "Tarea Personal",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpw5zucny1i",
+      "created": "2026-06-02"
     }
   ]
 }
