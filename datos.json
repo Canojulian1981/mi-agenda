@@ -25,18 +25,6 @@
       "created": "2025-05-20"
     },
     {
-      "id": "t003",
-      "title": "Analizar y Responder correo Beyond Oil",
-      "desc": "",
-      "type": "Tarea",
-      "priority": "media",
-      "stage": "done",
-      "date": "2025-05-22",
-      "followup": false,
-      "followupDate": "",
-      "created": "2025-05-20"
-    },
-    {
       "id": "t004",
       "title": "Analizar y Responder correo PleatPak",
       "desc": "",
