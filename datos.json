@@ -287,6 +287,18 @@
       "followupDate": "",
       "id": "mpym8clw34e",
       "created": "2026-06-03"
+    },
+    {
+      "title": "Proyecto venta resposteria Carlos Avila",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpyncc4u4gp",
+      "created": "2026-06-03"
     }
   ]
 }
