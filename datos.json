@@ -311,6 +311,18 @@
       "followupDate": "",
       "id": "mpynd159y9u",
       "created": "2026-06-03"
+    },
+    {
+      "title": "Pedir Tarjeta debito a la casa de Pablo",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpyndvlwo53",
+      "created": "2026-06-03"
     }
   ]
 }
