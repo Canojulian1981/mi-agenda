@@ -299,6 +299,18 @@
       "followupDate": "",
       "id": "mpyncc4u4gp",
       "created": "2026-06-03"
+    },
+    {
+      "title": "Pedir cita en Colpensiones",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpynd159y9u",
+      "created": "2026-06-03"
     }
   ]
 }
