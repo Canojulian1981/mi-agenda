@@ -299,6 +299,18 @@
       "followupDate": "",
       "id": "mpw60ow3ib0",
       "created": "2026-06-02"
+    },
+    {
+      "title": "Uno a Unos Ctg ",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mpym8clw34e",
+      "created": "2026-06-03"
     }
   ]
 }
