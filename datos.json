@@ -311,6 +311,18 @@
       "followupDate": "",
       "id": "mqdzqpwh5ob",
       "created": "2026-06-14"
+    },
+    {
+      "title": "Respuesta propuesta Aromarial",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "alta",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mqdzuzwnga5",
+      "created": "2026-06-14"
     }
   ]
 }
