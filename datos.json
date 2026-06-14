@@ -287,6 +287,18 @@
       "followupDate": "",
       "id": "mqdzmdraqzl",
       "created": "2026-06-14"
+    },
+    {
+      "title": "LIquidar cuentas con Refrigerar",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mqdzp98972a",
+      "created": "2026-06-14"
     }
   ]
 }
