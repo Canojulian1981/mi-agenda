@@ -323,6 +323,18 @@
       "followupDate": "",
       "id": "mqdzuzwnga5",
       "created": "2026-06-14"
+    },
+    {
+      "title": "Respuesta Propuesta Carlos de Avila",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mqdzveax3w5",
+      "created": "2026-06-14"
     }
   ]
 }
