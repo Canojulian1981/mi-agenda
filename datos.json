@@ -30,7 +30,7 @@
       "desc": "",
       "type": "Tarea",
       "priority": "media",
-      "stage": "review",
+      "stage": "progress",
       "date": "2025-05-27",
       "followup": false,
       "followupDate": "",
