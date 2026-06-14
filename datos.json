@@ -275,6 +275,18 @@
       "followupDate": "",
       "id": "mqdzjcs0wnj",
       "created": "2026-06-14"
+    },
+    {
+      "title": "Trabajar en calculadora PleatPak",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mqdzmdraqzl",
+      "created": "2026-06-14"
     }
   ]
 }
