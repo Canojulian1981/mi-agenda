@@ -90,7 +90,7 @@
       "desc": "",
       "type": "Tarea Personal",
       "priority": "media",
-      "stage": "progress",
+      "stage": "done",
       "date": "2025-05-23",
       "followup": false,
       "followupDate": "",
