@@ -114,7 +114,7 @@
       "desc": "",
       "type": "Tarea Personal",
       "priority": "baja",
-      "stage": "review",
+      "stage": "done",
       "date": "2025-05-27",
       "followup": false,
       "followupDate": "",
