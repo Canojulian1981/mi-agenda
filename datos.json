@@ -347,6 +347,18 @@
       "followupDate": "",
       "id": "mqe2kohg3yd",
       "created": "2026-06-14"
+    },
+    {
+      "title": "cuadrar reunion con Marketing Lagartos para revisar que publicidad hacer",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mqgqx4b4z1f",
+      "created": "2026-06-16"
     }
   ]
 }
