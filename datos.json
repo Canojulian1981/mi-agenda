@@ -97,18 +97,6 @@
       "created": "2025-05-20"
     },
     {
-      "id": "t012",
-      "title": "Pago cuentas Laura",
-      "desc": "",
-      "type": "Tarea Personal",
-      "priority": "media",
-      "stage": "review",
-      "date": "2025-05-23",
-      "followup": false,
-      "followupDate": "",
-      "created": "2025-05-20"
-    },
-    {
       "id": "t013",
       "title": "Pago predial BV",
       "desc": "Preguntar numero de cuenta para poder transferir mas de 3 mm",
