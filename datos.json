@@ -359,6 +359,18 @@
       "followupDate": "",
       "id": "mqgqx4b4z1f",
       "created": "2026-06-16"
+    },
+    {
+      "title": "Idea de entregar a mejor precio por Envia *Sin comprometerse por horario*",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mqi3disr0nu",
+      "created": "2026-06-17"
     }
   ]
 }
