@@ -169,18 +169,6 @@
       "created": "2026-05-26"
     },
     {
-      "title": "Revisar compras rappi con Itau",
-      "desc": "Laura debe revisar",
-      "type": "Tarea",
-      "priority": "alta",
-      "stage": "idea",
-      "date": "2026-05-29",
-      "followup": false,
-      "followupDate": "",
-      "id": "mpm2xxjiadt",
-      "created": "2026-05-26"
-    },
-    {
       "title": "Pagar 200.000 a carlos vecino",
       "desc": "",
       "type": "Tarea Personal",
