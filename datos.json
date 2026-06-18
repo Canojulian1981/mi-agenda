@@ -335,6 +335,18 @@
       "followupDate": "",
       "id": "mqi3disr0nu",
       "created": "2026-06-17"
+    },
+    {
+      "title": "Pruebas arroz de dos clientes y nosotros",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "alta",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mqjibh9ho90",
+      "created": "2026-06-18"
     }
   ]
 }
