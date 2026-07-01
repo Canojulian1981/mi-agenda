@@ -49,18 +49,6 @@
       "created": "2025-05-20"
     },
     {
-      "id": "t010",
-      "title": "Sueldo Jani",
-      "desc": "",
-      "type": "Tarea Personal",
-      "priority": "media",
-      "stage": "done",
-      "date": "2025-05-23",
-      "followup": false,
-      "followupDate": "",
-      "created": "2025-05-20"
-    },
-    {
       "id": "t011",
       "title": "Msn Yiyo Kandeo con Avance",
       "desc": "",
