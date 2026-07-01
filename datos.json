@@ -251,6 +251,18 @@
       "followupDate": "",
       "id": "mqjibh9ho90",
       "created": "2026-06-18"
+    },
+    {
+      "title": "Total $1.105.150 Viaticos y Gastos Junio Julian",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mr2arrbtezx",
+      "created": "2026-07-01"
     }
   ]
 }
