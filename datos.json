@@ -239,6 +239,18 @@
       "followupDate": "",
       "id": "mr9tv90emib",
       "created": "2026-07-06"
+    },
+    {
+      "title": "Marketing Wilterhalter",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mr9tyxx42kn",
+      "created": "2026-07-06"
     }
   ]
 }
