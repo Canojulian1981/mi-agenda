@@ -233,7 +233,7 @@
       "desc": "",
       "type": "Tarea",
       "priority": "alta",
-      "stage": "idea",
+      "stage": "progress",
       "date": "",
       "followup": false,
       "followupDate": "",
