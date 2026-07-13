@@ -251,6 +251,18 @@
       "followupDate": "",
       "id": "mrdl72t2fyc",
       "created": "2026-07-09"
+    },
+    {
+      "title": "Compra pasajes Disney: 7.919.907 (se pagaron con TC Bancolombia de Julian y la plata va a salir de la venta de la Runner).",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mrjh9zm039n",
+      "created": "2026-07-13"
     }
   ]
 }
