@@ -185,7 +185,7 @@
       "desc": "",
       "type": "Tarea",
       "priority": "media",
-      "stage": "progress",
+      "stage": "done",
       "date": "",
       "followup": false,
       "followupDate": "",
