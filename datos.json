@@ -263,6 +263,18 @@
       "followupDate": "",
       "id": "mrjh9zm039n",
       "created": "2026-07-13"
+    },
+    {
+      "title": "Plantear mejores app entregas a Fabio",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mrji6d39uhc",
+      "created": "2026-07-13"
     }
   ]
 }
