@@ -275,6 +275,18 @@
       "followupDate": "",
       "id": "mrji6d39uhc",
       "created": "2026-07-13"
+    },
+    {
+      "title": "Negociar tarifa internet Bosque Verde esta en 117.866",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "ms3e6wzco69",
+      "created": "2026-07-27"
     }
   ]
 }
