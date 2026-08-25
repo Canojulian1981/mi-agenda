@@ -53,7 +53,7 @@
       "desc": "",
       "type": "Seguimiento",
       "priority": "alta",
-      "stage": "review",
+      "stage": "done",
       "date": "2026-05-26",
       "followup": false,
       "followupDate": "",
