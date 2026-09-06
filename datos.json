@@ -263,6 +263,18 @@
       "followupDate": "",
       "id": "mtpe2h3idyo",
       "created": "2026-09-06"
+    },
+    {
+      "title": "2 o 3  camaras de Ctg no estan grabando.",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "alta",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mtq04qkybqr",
+      "created": "2026-09-06"
     }
   ]
 }
