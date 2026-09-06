@@ -275,6 +275,18 @@
       "followupDate": "",
       "id": "mtj2388xip1",
       "created": "2026-09-01"
+    },
+    {
+      "title": "corregir direccion bancolombia mama ciudad ",
+      "desc": "",
+      "type": "Tarea Personal",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mtpe2h3idyo",
+      "created": "2026-09-06"
     }
   ]
 }
