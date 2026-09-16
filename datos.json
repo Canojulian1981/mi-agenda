@@ -287,6 +287,18 @@
       "followupDate": "",
       "id": "mu4m1j20gs8",
       "created": "2026-09-16"
+    },
+    {
+      "title": "Plan saneamiento actualizacion Med y Ctg",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mu4nc0czr0z",
+      "created": "2026-09-16"
     }
   ]
 }
