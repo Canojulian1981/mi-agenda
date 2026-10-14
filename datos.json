@@ -299,6 +299,18 @@
       "followupDate": "",
       "id": "mu4nc0czr0z",
       "created": "2026-09-16"
+    },
+    {
+      "title": "revisar negocio OXXO para no estar dejando plata sobre la mesa",
+      "desc": "",
+      "type": "Tarea",
+      "priority": "media",
+      "stage": "idea",
+      "date": "",
+      "followup": false,
+      "followupDate": "",
+      "id": "mv8fcj9kstx",
+      "created": "2026-10-14"
     }
   ]
 }
