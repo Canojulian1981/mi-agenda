@@ -13,18 +13,6 @@
       "created": "2025-05-20"
     },
     {
-      "id": "t002",
-      "title": "Cotizacion filtro ice maker y manguera diego",
-      "desc": "",
-      "type": "Tarea Personal",
-      "priority": "alta",
-      "stage": "progress",
-      "date": "2025-05-29",
-      "followup": false,
-      "followupDate": "",
-      "created": "2025-05-20"
-    },
-    {
       "id": "t004",
       "title": "Analizar y Responder correo PleatPak",
       "desc": "",
